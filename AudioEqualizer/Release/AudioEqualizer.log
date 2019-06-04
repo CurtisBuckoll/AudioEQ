@@ -1,0 +1,9 @@
+﻿  AudioDevice.cpp
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\audiodevice.cpp(13): warning C4114: same type qualifier used more than once
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\audiodevice.cpp(114): warning C4018: '<': signed/unsigned mismatch
+  Generating code
+  3 of 313 functions ( 1.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    3 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  AudioEqualizer.vcxproj -> C:\Users\Curtis\Documents\PortfolioProjects\AudioEqualizer\Release\AudioEqualizer.exe
