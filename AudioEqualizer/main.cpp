@@ -7,11 +7,15 @@
 #include "Window.h"
 #include "InputManager.h"
 #include "EQDraw.h"
+#include "Equalizer.h"
 
 static const int kWIN_WIDTH = 600;
 static const int kWIN_HEIGHT = 400;
 
-static const int NUM_EQ_SAMPLES = 64;
+static const int kNUM_EQ_SAMPLES = 64;
+static const int kNUM_CHUNKS_TO_SAMPLE_PER_FRAME = 32;
+
+const char const* FILE_PATH = "../resources/Q2_sample_2.wav";
 
 // -----------------------------------------------------------------
 //
@@ -21,14 +25,56 @@ int main( int argc, char** argv )
     std::unique_ptr<IWindow> window( new Window( kWIN_WIDTH, kWIN_HEIGHT ) );
     window->init();
 
-    EQDraw eq_curve( *window, NUM_EQ_SAMPLES );
+    // Get the audio data from file.
+    WavFile wav_file( kNUM_EQ_SAMPLES );
+    wav_file.openWavFile( FILE_PATH );
+    wav_file.displayInformation( FILE_PATH );
+
+    EQDraw eq_curve( *window, kNUM_EQ_SAMPLES );
+
+    // Create our input/output eq vectors.
+    std::vector<std::vector<double>> eq_samples_in( kNUM_CHUNKS_TO_SAMPLE_PER_FRAME, std::vector<double>( kNUM_EQ_SAMPLES, 0.0 ) );
+
+    //std::vector<std::vector<double>> eq_samples_out( kNUM_CHUNKS_TO_SAMPLE_PER_FRAME, std::vector<double>( kNUM_EQ_SAMPLES, 0.0 ) );
+
+    std::vector<std::vector<double>> eq_samples_out;
+
+    Equalizer equalizer( kNUM_EQ_SAMPLES );
 
     InputManager input_manager;
 
+    //AudioDevice audio_device();
+    //audio_device.setPlayState( DEVICE_STATE::PLAY );
+
+    size_t chunk_index = 0;
+
+    bool running = true;
     while( input_manager.pollForEvents() )
     {
+        // Set up our input data vectors.
+        for( auto& chunk : eq_samples_in )
+        {
+            if( chunk_index >= wav_file.vectorized_audio_.size() )
+            {
+                // Something is broken here.. when we get out of range.
+                // chunk = std::move( std::vector<double>( kNUM_EQ_SAMPLES, 0.0 ) );
+                running = false;
+            }
+            else
+            {
+                chunk = std::move( wav_file.vectorized_audio_[chunk_index++] );
+            }
+        }
+
+        if( !running ) break;
+
         eq_curve.processUserInput( input_manager.getKeys() );
         eq_curve.drawToWindow();
+
+        equalizer.eq_chunks( eq_samples_in, eq_samples_out );
+
+        // Need to then reset the out data:
+        eq_samples_out.clear();
         
         window->RenderFrame();
     }

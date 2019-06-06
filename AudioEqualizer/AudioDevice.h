@@ -10,7 +10,7 @@ struct AudioConfig
     int _sampling_freq;
     int _bit_depth_stereo;
     int _volume_factor;
-    WavFile _wav_file;
+    //WavFile _wav_file;
 };
 
 struct AudioBuffer

@@ -126,8 +126,6 @@ void EQDraw::updateEQCoeffs()
 
         //std::cout << eq_coeffs_[i] << std::endl;
     }
-
-    return;
 }
 
 // =======================================================================

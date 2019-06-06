@@ -10,7 +10,7 @@
 //static const float TAU = 2 * PI;
 //static const Uint32 SDL_AUDIO_TRANSPARENTLY_CONVERT_FORMAT = 0;
 
-const char const* FILE_PATH_TEMP = "../resources/Q2_sample_2.wav";
+//const char const* FILE_PATH_TEMP = "../resources/Q2_sample_2.wav";
 
 
 // For testing, delete this pls. ****************
@@ -80,10 +80,10 @@ AudioDevice::AudioDevice()
     _audio_config._volume_factor    = 1000;
 
     // Get the audio data from file.
-    _audio_config._wav_file.openWavFile( FILE_PATH_TEMP );
-    _audio_config._wav_file.displayInformation( FILE_PATH_TEMP );
+    //_audio_config._wav_file.openWavFile( FILE_PATH_TEMP );
+    //_audio_config._wav_file.displayInformation( FILE_PATH_TEMP );
 
-    temp_apply_eq( _audio_config._wav_file );
+    //temp_apply_eq( _audio_config._wav_file );
 
     // Set up the buffer. Set _write_pos to next so that the buffer 
     // initally has some data.
@@ -264,15 +264,22 @@ void writeToUserAudioBuffer( AudioBuffer* audio_buffer, func get_sample )
 
 // =======================================================================
 //
-auto sampleFromAudioStream = []( AudioConfig* audio_config ) -> Sint16
-{
-    if( audio_config->_wav_file.ifMoreDataAvailable() )
-    {
-        return static_cast<Sint16>( audio_config->_wav_file.readCurrentInput() );
-    }
+//auto sampleFromAudioStream = []( AudioConfig* audio_config ) -> Sint16
+//{
+//    if( audio_config->_wav_file.ifMoreDataAvailable() )
+//    {
+//        return static_cast<Sint16>( audio_config->_wav_file.readCurrentInput() );
+//    }
+//
+//    return 0;
+//};
 
-    return 0;
-};
+Sint16 sampleSineWave( AudioConfig* audio_config )
+{
+    static int sample_index = 0;
+    double half_wave_counter = 90;
+    return 3000 * sin( 2 * 3.14159265359 * sample_index++ / half_wave_counter );
+}
 
 // =======================================================================
 //
@@ -283,7 +290,7 @@ int getUserAudioDataThread( void* user_data )
     while( audio_thread->_thread_is_alive )
     {
         SDL_LockAudioDevice( audio_thread->_audio_buffer->_device_id );
-        writeToUserAudioBuffer( audio_thread->_audio_buffer, sampleFromAudioStream );
+        writeToUserAudioBuffer( audio_thread->_audio_buffer, sampleSineWave );
         SDL_UnlockAudioDevice( audio_thread->_audio_buffer->_device_id );
     }
 
