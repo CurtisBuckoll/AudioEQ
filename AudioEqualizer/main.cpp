@@ -43,8 +43,8 @@ int main( int argc, char** argv )
 
     InputManager input_manager;
 
-    //AudioDevice audio_device();
-    //audio_device.setPlayState( DEVICE_STATE::PLAY );
+    AudioDevice audio_device;
+    audio_device.setPlayState( DEVICE_STATE::PLAY );
 
     size_t chunk_index = 0;
 
@@ -56,8 +56,7 @@ int main( int argc, char** argv )
         {
             if( chunk_index >= wav_file.vectorized_audio_.size() )
             {
-                // Something is broken here.. when we get out of range.
-                // chunk = std::move( std::vector<double>( kNUM_EQ_SAMPLES, 0.0 ) );
+                chunk = std::move( std::vector<double>( kNUM_EQ_SAMPLES, 0.0 ) );
                 running = false;
             }
             else
@@ -66,12 +65,14 @@ int main( int argc, char** argv )
             }
         }
 
-        if( !running ) break;
+        //if( !running ) break;
 
         eq_curve.processUserInput( input_manager.getKeys() );
         eq_curve.drawToWindow();
 
         equalizer.eq_chunks( eq_samples_in, eq_samples_out );
+
+        audio_device.addToBuffer( eq_samples_out );
 
         // Need to then reset the out data:
         eq_samples_out.clear();
@@ -79,7 +80,7 @@ int main( int argc, char** argv )
         window->RenderFrame();
     }
 
-
+    audio_device.terminate();
     window->close();
 
     return 0;

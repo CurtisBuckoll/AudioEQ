@@ -410,6 +410,12 @@ int WavFile::openWavFile( const char* fileName )
         }
     }
 
+    // Fill remaining of vector with 0's
+    while( vectorized_audio_.back().size() < kCHUNK_SIZE )
+    {
+        vectorized_audio_.back().push_back( 0.0 );
+    }
+
 #ifdef  DEBUG11
     for( i = 0; i < maxInSamples; i++ )
     {

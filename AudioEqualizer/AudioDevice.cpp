@@ -238,7 +238,7 @@ void writeToUserAudioBuffer( AudioBuffer* audio_buffer, func get_sample )
     {
         while( write_pos <= final_pos )
         {
-            Sint16 sample_val = get_sample( audio_buffer->_audio_config );
+            Sint16 sample_val = get_sample( audio_buffer ); //get_sample( audio_buffer->_audio_config )
             *write_pos++ = sample_val;
             *write_pos++ = sample_val;
             bytes_written += 4;
@@ -252,7 +252,7 @@ void writeToUserAudioBuffer( AudioBuffer* audio_buffer, func get_sample )
 
     while( write_pos <= final_pos )
     {
-        Sint16 sample_val = get_sample( audio_buffer->_audio_config );
+        Sint16 sample_val = get_sample( audio_buffer ); //get_sample( audio_buffer->_audio_config )
         *write_pos++ = sample_val;
         *write_pos++ = sample_val;
         bytes_written += 4;
@@ -283,6 +283,14 @@ Sint16 sampleSineWave( AudioConfig* audio_config )
 
 // =======================================================================
 //
+Sint16 getSampleFromInternalBuffer( AudioBuffer* audio_buffer )
+{
+    return audio_buffer->_input_buffer.getSample();
+}
+
+
+// =======================================================================
+//
 int getUserAudioDataThread( void* user_data )
 {
     ThreadContext* audio_thread = static_cast<ThreadContext*>( user_data );
@@ -290,7 +298,7 @@ int getUserAudioDataThread( void* user_data )
     while( audio_thread->_thread_is_alive )
     {
         SDL_LockAudioDevice( audio_thread->_audio_buffer->_device_id );
-        writeToUserAudioBuffer( audio_thread->_audio_buffer, sampleSineWave );
+        writeToUserAudioBuffer( audio_thread->_audio_buffer, getSampleFromInternalBuffer );
         SDL_UnlockAudioDevice( audio_thread->_audio_buffer->_device_id );
     }
 
@@ -311,6 +319,13 @@ void AudioDevice::setPlayState( DEVICE_STATE state )
 
     _audio_thread = SDL_CreateThread( getUserAudioDataThread, "Audio", (void*)&_thread_context );
 
+}
+
+// =======================================================================
+//
+void AudioDevice::addToBuffer( std::vector<std::vector<double>>& data )
+{
+    _audio_buffer._input_buffer.addToBuffer( data );
 }
 
 // =======================================================================
