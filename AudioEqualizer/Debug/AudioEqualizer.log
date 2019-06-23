@@ -1,3 +1,7 @@
-﻿  main.cpp
-c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\main.cpp(18): warning C4114: same type qualifier used more than once
+﻿  EQDraw.cpp
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(96): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(100): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(112): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(116): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(169): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   AudioEqualizer.vcxproj -> C:\Users\Curtis\Documents\PortfolioProjects\AudioEqualizer\Debug\AudioEqualizer.exe

@@ -55,7 +55,7 @@ public:
     // ****** TEMP!!!!
     double* get_raw_data_pointer();
 
-    std::vector<std::vector<double>> vectorized_audio_;
+    std::vector<std::vector<double>> _vectorized_audio;
 
     /* ====================  LIFECYCLE     ======================================= */
 

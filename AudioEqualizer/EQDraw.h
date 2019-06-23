@@ -48,6 +48,10 @@ public:
 
     // -------------------------------------------------------------
     //
+    void drawSpectrumTowindow( const std::vector<double>& freq_spectrum );
+
+    // -------------------------------------------------------------
+    //
     ~EQDraw();
 
 private:

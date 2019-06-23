@@ -15,7 +15,7 @@ static const int kWIN_HEIGHT = 400;
 static const int kNUM_EQ_SAMPLES = 64;
 static const int kNUM_CHUNKS_TO_SAMPLE_PER_FRAME = 32;
 
-const char const* FILE_PATH = "../resources/Q2_sample_2.wav";
+const char const* FILE_PATH = "../resources/sine_sweep.wav";
 
 // -----------------------------------------------------------------
 //
@@ -43,7 +43,7 @@ int main( int argc, char** argv )
 
     InputManager input_manager;
 
-    AudioDevice audio_device;
+    AudioDevice audio_device( std::move(wav_file._vectorized_audio), kNUM_EQ_SAMPLES );
     audio_device.setPlayState( DEVICE_STATE::PLAY );
 
     size_t chunk_index = 0;
@@ -52,30 +52,35 @@ int main( int argc, char** argv )
     while( input_manager.pollForEvents() )
     {
         // Set up our input data vectors.
-        for( auto& chunk : eq_samples_in )
-        {
-            if( chunk_index >= wav_file.vectorized_audio_.size() )
-            {
-                chunk = std::move( std::vector<double>( kNUM_EQ_SAMPLES, 0.0 ) );
-                running = false;
-            }
-            else
-            {
-                chunk = std::move( wav_file.vectorized_audio_[chunk_index++] );
-            }
-        }
+        //for( auto& chunk : eq_samples_in )
+        //{
+        //    if( chunk_index >= wav_file._vectorized_audio.size() )
+        //    {
+        //        chunk = std::move( std::vector<double>( kNUM_EQ_SAMPLES, 0.0 ) );
+        //        running = false;
+        //    }
+        //    else
+        //    {
+        //        chunk = std::move( wav_file._vectorized_audio[chunk_index++] );
+        //    }
+        //}
 
         //if( !running ) break;
 
         eq_curve.processUserInput( input_manager.getKeys() );
+
+        std::vector<double> audio_spectrum;
+        audio_device.getFrequencySpectrum( audio_spectrum );
+
+        eq_curve.drawSpectrumTowindow( audio_spectrum );
         eq_curve.drawToWindow();
 
-        equalizer.eq_chunks( eq_samples_in, eq_samples_out );
+        //equalizer.eq_chunks( eq_samples_in, eq_samples_out );
 
-        audio_device.addToBuffer( eq_samples_out );
+        //audio_device.addToBuffer( eq_samples_out );
 
         // Need to then reset the out data:
-        eq_samples_out.clear();
+        //eq_samples_out.clear();
         
         window->RenderFrame();
     }

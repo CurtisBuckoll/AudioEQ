@@ -4,38 +4,8 @@
 #include <cstring>
 #include "WavFile.h"
 
-// =======================================================================
-// *********************************   We will optimize this little nugget   *********************************
-class InputBuffer {
-public:
-    std::vector<double> samples;
-    size_t front_index;
-
-    InputBuffer()
-        : front_index( 0 )
-        , samples( 44100, 0.0 )
-    {}
-
-    void addToBuffer( std::vector<std::vector<double>> data )
-    {
-        for( std::vector<double> sub_arr : data )
-        {
-            for( double sample : sub_arr )
-            {
-                samples.push_back( sample );
-            }
-        }
-    }
-
-    Sint16 getSample()
-    {
-        if( front_index < samples.size() )
-        {
-            return static_cast<Sint16>( samples[front_index++] );
-        }
-        return 0;
-    }
-};
+#include "AudioOutputBuffer.h"
+#include "Equalizer.h"
 
 // =======================================================================
 //
@@ -45,21 +15,51 @@ struct AudioConfig
     int _sampling_freq;
     int _bit_depth_stereo;
     int _volume_factor;
-    //WavFile _wav_file;
 };
 
 // =======================================================================
 //
 struct AudioBuffer
 {
-    Uint8* _buffer;
-    size_t _size;
-    int _read_pos;
-    int _write_pos;
-    SDL_AudioDeviceID _device_id;
-    AudioConfig* _audio_config;
+    AudioBuffer( std::vector<std::vector<double>>&& data,
+                 size_t chunk_size )
+        : _output_buffer( chunk_size )
+        , _input_buffer( std::move( data ) )
+        , _equalizer( chunk_size )
+    {};
 
-    InputBuffer _input_buffer;
+    struct InputBuffer 
+    {
+        std::vector<std::vector<double>> _buffer;
+        size_t _chunk_index;
+        size_t _chunk_sample_index;
+
+        InputBuffer( std::vector<std::vector<double>>&& input_data )
+            : _chunk_index( 0 )
+            , _chunk_sample_index( 0 )
+            , _buffer( std::move( input_data ) )
+        {}
+
+        std::vector<double> getNextChunk()
+        {
+            return std::move( _buffer[_chunk_index++] );
+        }
+
+        bool outOfData()
+        {
+            return _chunk_index >= _buffer.size();
+        }
+
+        InputBuffer() = delete;
+    };
+
+    AudioBuffer() = delete;
+
+    SDL_AudioDeviceID _device_id;
+    AudioConfig*      _audio_config;
+    InputBuffer       _input_buffer;
+    AudioOutputBuffer _output_buffer;
+    Equalizer         _equalizer;
 };
 
 // =======================================================================
@@ -83,12 +83,12 @@ enum class DEVICE_STATE
 //
 class AudioDevice
 {
-
 public:
 
     // -----------------------------------------------------------------
-    //
-    AudioDevice();
+    // Takes ownership of the buffer supplied.
+    AudioDevice( std::vector<std::vector<double>>&& data, 
+                 size_t chunk_size );
 
     // -----------------------------------------------------------------
     //
@@ -99,12 +99,8 @@ public:
     void setPlayState( DEVICE_STATE state);
 
     // -----------------------------------------------------------------
-    // Takes ownership of the buffer supplied.
-    void addToBuffer( std::vector<std::vector<double>>& data );
-
-    // -----------------------------------------------------------------
     //
-    Sint16 getSampleFromInternalBuffer();
+    void getFrequencySpectrum( std::vector<double>& freq_coeffs );
 
     // -----------------------------------------------------------------
     //
@@ -115,11 +111,10 @@ public:
 
 private:
 
-    AudioConfig _audio_config;
-    AudioBuffer _audio_buffer;
+    AudioConfig   _audio_config;
+    AudioBuffer   _audio_buffer;
     ThreadContext _thread_context;
-
-    SDL_Thread* _audio_thread;
+    SDL_Thread*   _audio_thread;
 
     //InputBuffer _input_buffer;
 };

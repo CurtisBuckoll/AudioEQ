@@ -105,6 +105,22 @@ void EQDraw::drawToWindow()
     }
 }
 
+// -------------------------------------------------------------
+//
+void EQDraw::drawSpectrumTowindow(const std::vector<double>& freq_spectrum)
+{
+    vec2 prev( 0.0, std::abs( freq_spectrum[1]) / 20.0 );
+
+    for( size_t i = 2; i < freq_spectrum.size(); ++i )
+    {
+        vec2 next( ( i / static_cast<double>( freq_spectrum.size() ) ) * window_.getWidth(), std::abs( freq_spectrum[i] ) / 40.0 );
+
+        drawLine( prev, next );
+
+        prev = next;
+    }
+}
+
 // =======================================================================
 //
 void EQDraw::updateEQCoeffs()
