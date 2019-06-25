@@ -13,9 +13,9 @@ static const int kWIN_WIDTH = 600;
 static const int kWIN_HEIGHT = 400;
 
 static const int kNUM_EQ_SAMPLES = 64;
-static const int kNUM_CHUNKS_TO_SAMPLE_PER_FRAME = 32;
+//static const int kNUM_CHUNKS_TO_SAMPLE_PER_FRAME = 32;
 
-const char const* FILE_PATH = "../resources/sine_sweep.wav";
+const char const* FILE_PATH = "../resources/sample_piano.wav";
 
 // -----------------------------------------------------------------
 //
@@ -33,11 +33,11 @@ int main( int argc, char** argv )
     EQDraw eq_curve( *window, kNUM_EQ_SAMPLES );
 
     // Create our input/output eq vectors.
-    std::vector<std::vector<double>> eq_samples_in( kNUM_CHUNKS_TO_SAMPLE_PER_FRAME, std::vector<double>( kNUM_EQ_SAMPLES, 0.0 ) );
+    //std::vector<std::vector<double>> eq_samples_in( kNUM_CHUNKS_TO_SAMPLE_PER_FRAME, std::vector<double>( kNUM_EQ_SAMPLES, 0.0 ) );
 
     //std::vector<std::vector<double>> eq_samples_out( kNUM_CHUNKS_TO_SAMPLE_PER_FRAME, std::vector<double>( kNUM_EQ_SAMPLES, 0.0 ) );
 
-    std::vector<std::vector<double>> eq_samples_out;
+    //std::vector<std::vector<double>> eq_samples_out;
 
     Equalizer equalizer( kNUM_EQ_SAMPLES );
 

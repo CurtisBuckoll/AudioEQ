@@ -15,8 +15,13 @@ static const double kQ_SCALE_SPEED = 0.5;
 static const double kMIN_Q = 1.5;
 static const double kMAX_Q = 30.0;
 
+static const double kFREQ_SPECTRUM_HEIGHT_DAMPENING = 40.0; // 40.0
+
 static const double kPI = 3.141592653589793;
 static const double kE  = 2.718281828459045;
+
+static const Color256 kEQ_CURVE_COLOUR( 255, 255, 255 );
+static const Color256 kSPECTRUM_ANALYSIS_COLOUR( 0, 0, 155 );
 
 // =======================================================================
 //
@@ -99,7 +104,7 @@ void EQDraw::drawToWindow()
     {
         vec2 next( ( i / static_cast<double>(eq_coeffs_.size()) ) * window_.getWidth(), ( window_.getHeight() / 2 ) + eq_coeffs_[i] );
 
-        drawLine( prev, next );
+        drawLine( prev, next, kEQ_CURVE_COLOUR );
 
         prev = next;
     }
@@ -109,13 +114,14 @@ void EQDraw::drawToWindow()
 //
 void EQDraw::drawSpectrumTowindow(const std::vector<double>& freq_spectrum)
 {
-    vec2 prev( 0.0, std::abs( freq_spectrum[1]) / 20.0 );
+    vec2 prev( 0.0, 0.0 );
 
-    for( size_t i = 2; i < freq_spectrum.size(); ++i )
+    for( size_t i = 1; i < freq_spectrum.size(); ++i )
     {
-        vec2 next( ( i / static_cast<double>( freq_spectrum.size() ) ) * window_.getWidth(), std::abs( freq_spectrum[i] ) / 40.0 );
+        vec2 next( ( i / static_cast<double>( freq_spectrum.size() ) ) * window_.getWidth(), 
+                     std::abs( freq_spectrum[i] ) / kFREQ_SPECTRUM_HEIGHT_DAMPENING );
 
-        drawLine( prev, next );
+        drawLine( prev, next, kSPECTRUM_ANALYSIS_COLOUR );
 
         prev = next;
     }
@@ -146,7 +152,7 @@ void EQDraw::updateEQCoeffs()
 
 // =======================================================================
 //
-void EQDraw::drawLine( vec2 p1, vec2 p2 )
+void EQDraw::drawLine( const vec2& p1, const vec2& p2, Color256 colour )
 {
     if( update_curve_ )
     {
@@ -156,19 +162,66 @@ void EQDraw::drawLine( vec2 p1, vec2 p2 )
         update_curve_ = false;
     }
 
-    if( p2.x_ < p1.x_ )
-    {
-        std::swap( p1, p2 );
-    }
+    //if( p2.x_ < p1.x_ )
+    //{
+    //    std::swap( p1, p2 );
+    //}
 
     double slope = static_cast<double>( p2.y_ - p1.y_ ) / static_cast<double>( p2.x_ - p1.x_ );
-    double y = p1.y_;
 
-    for( int x = static_cast<int>( std::round( p1.x_ ) ); x < static_cast<int>( std::round( p2.x_ ) ); ++x )
+    if( slope >= 0.0 )
     {
-        window_.setPixel( x, static_cast<int>( std::round<int>( y ) ), line_colour_ );
-        y += slope;
+        if( slope > 1.0 )
+        {
+            slope = 1.0 / slope;
+            double x = p1.x_;
+            for( int y = static_cast<int>( std::round( p1.y_ ) ); y < static_cast<int>( std::round( p2.y_ ) ); ++y )
+            {
+                window_.setPixel( static_cast<int>( std::round( x ) ), y, colour );
+                x += slope;
+            }
+        }
+        else
+        {
+            double y = p1.y_;
+            for( int x = static_cast<int>( std::round( p1.x_ ) ); x < static_cast<int>( std::round( p2.x_ ) ); ++x )
+            {
+                window_.setPixel( x, static_cast<int>( std::round<int>( y ) ), colour );
+                y += slope;
+            }
+
+        }
     }
+    else
+    {
+        if( slope < -1.0 )
+        {
+            slope = -1.0 / slope;
+            double x = p1.x_;
+            for( int y = static_cast<int>( std::round( p1.y_ ) ); y > static_cast<int>( std::round( p2.y_ ) ); --y )
+            {
+                window_.setPixel( static_cast<int>( std::round( x ) ), y, colour );
+                x += slope;
+            }
+        }
+        else
+        {
+            double y = p1.y_;
+            for( int x = static_cast<int>( std::round( p1.x_ ) ); x < static_cast<int>( std::round( p2.x_ ) ); ++x )
+            {
+                window_.setPixel( x, static_cast<int>( std::round<int>( y ) ), colour );
+                y += slope;
+            }
+
+        }
+    }
+
+    //double y = p1.y_;
+    //for( int x = static_cast<int>( std::round( p1.x_ ) ); x < static_cast<int>( std::round( p2.x_ ) ); ++x )
+    //{
+    //    window_.setPixel( x, static_cast<int>( std::round<int>( y ) ), line_colour_ );
+    //    y += slope;
+    //}
 
     // For test purposes...
     //window_.setPixel( eq_center_, static_cast<int>( std::round<int>( y + eq_gain_scale_ ) ), line_colour_ );

@@ -66,7 +66,7 @@ private:
 
     // -------------------------------------------------------------
     //
-    void drawLine( vec2 p1, vec2 p2 );
+    void drawLine( const vec2& p1, const vec2& p2, Color256 colour );
 
     // -------------------------------------------------------------
     // Member Variables
