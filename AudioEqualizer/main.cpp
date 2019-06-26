@@ -9,13 +9,18 @@
 #include "EQDraw.h"
 #include "Equalizer.h"
 
+// -----------------------------------------------------------------
+//
+
 static const int kWIN_WIDTH = 600;
 static const int kWIN_HEIGHT = 400;
-
 static const int kNUM_EQ_SAMPLES = 64;
-//static const int kNUM_CHUNKS_TO_SAMPLE_PER_FRAME = 32;
 
-const char const* FILE_PATH = "../resources/sample_piano.wav";
+std::vector<std::string> wav_files = { "../resources/sine_sweep.wav",
+                                       "../resources/sample_piano",
+                                       "../resources/Q2_sample_2.wav" };
+
+const char const* FILE_PATH = wav_files[0].c_str();
 
 // -----------------------------------------------------------------
 //

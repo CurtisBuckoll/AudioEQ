@@ -4,6 +4,9 @@
 
 #include <SDL\SDL.h>
 
+
+//========================================================================
+//
 InputManager::InputManager()
 {
 	for (unsigned int i = 0; i < kSIZE; i++)
@@ -12,13 +15,15 @@ InputManager::InputManager()
 	}
 }
 
-
+//========================================================================
+//
 InputManager::~InputManager()
 {
 	//Empty
 }
 
-
+//========================================================================
+//
 bool InputManager::pollForEvents()
 {
 	SDL_Event event;
@@ -47,19 +52,16 @@ bool InputManager::pollForEvents()
                 keys[kWHEEL_DOWN] = true;
             }
             break;
-        //default:
-        //    if( event.wheel.y == 0.0 )
-        //    {
-        //        keys[kWHEEL_UP] = false;
-        //        keys[kWHEEL_DOWN] = false;
-        //    }
-        //    break;
+
+        default:
+            break;
 		}
 	}
 	return true;
 }
 
-
+//========================================================================
+//
 bool* InputManager::getKeys()
 {
 	return &keys[0];

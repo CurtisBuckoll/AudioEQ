@@ -141,24 +141,29 @@ void processAudioToOutputBuffer( AudioBuffer* audio_buffer )
 {
     AudioBuffer::InputBuffer& input_buffer = audio_buffer->_input_buffer;
     AudioOutputBuffer& output_buffer       = audio_buffer->_output_buffer;
+    size_t num_iterations                  = 1;
 
-    bool save_coefficents = true;
     while( output_buffer.isEmpty() )
     {
         if( !input_buffer.outOfData() )
         {      
             std::vector<double> processed;
-            audio_buffer->_equalizer.eq( std::move( input_buffer.getNextChunk() ), processed, save_coefficents );
+            audio_buffer->_equalizer.eq( std::move( input_buffer.getNextChunk() ), processed, true );
+
+            // ************************************************************************************************
+            // SHOULD ADD A SET OR ADD FLAG TO ABOVE ^^^^ !!
+
             output_buffer.moveToBuffer( std::move( processed ) );
-            save_coefficents = false;
         }
         else
         {
             output_buffer.moveToBuffer( std::move( std::vector<double>( output_buffer.getChunkSize(), 0.0 ) ) );
         }
+
+        ++num_iterations;
     }
 
-    return;
+    audio_buffer->_equalizer.normalizeSpectrum( num_iterations );
 
     //size_t bytes_written = 0;
 
@@ -238,7 +243,7 @@ void AudioDevice::setPlayState( DEVICE_STATE state )
 void AudioDevice::getFrequencySpectrum( std::vector<double>& freq_coeffs )
 {
     SDL_LockAudioDevice( _audio_buffer._device_id );
-    _audio_buffer._equalizer.get_current_coeffecients( freq_coeffs );
+    _audio_buffer._equalizer.getCurrentSpectrum( freq_coeffs );
     SDL_UnlockAudioDevice( _audio_buffer._device_id );
 }
 
