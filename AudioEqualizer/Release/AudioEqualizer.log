@@ -1,8 +1,13 @@
-﻿  main.cpp
+﻿  AudioDevice.cpp
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\audiodevice.cpp(208): warning C4244: 'return': conversion from 'double' to 'Sint16', possible loss of data
+  DCT.cpp
+  DFT.cpp
+  Equalizer.cpp
+  main.cpp
 c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\main.cpp(25): warning C4114: same type qualifier used more than once
   Generating code
-  69 of 501 functions (13.8%) were compiled, the rest were copied from previous compilation.
+  0 of 501 functions ( 0.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    10 functions had inline decision re-evaluated but remain unchanged
+    41 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   AudioEqualizer.vcxproj -> C:\Users\Curtis\Documents\PortfolioProjects\AudioEqualizer\Release\AudioEqualizer.exe

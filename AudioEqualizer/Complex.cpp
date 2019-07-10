@@ -4,7 +4,7 @@
 #include <cmath>
 #include <iostream>
 
-namespace math
+namespace Math
 {
 //========================================================================
 //
@@ -67,6 +67,15 @@ Complex Complex::operator-( const Complex& rhs )
     res._re = _re - rhs.re();
     res._im = _im - rhs.im();
     return std::move( res );
+}
+
+//========================================================================
+//
+Complex& Complex::operator+=( const Complex& rhs )
+{
+    _im += rhs.im();
+    _re += rhs.re();
+    return *this;
 }
 
 //========================================================================

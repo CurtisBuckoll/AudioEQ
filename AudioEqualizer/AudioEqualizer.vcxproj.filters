@@ -63,6 +63,9 @@
     <ClInclude Include="Complex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DFT.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -105,6 +108,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Complex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DFT.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

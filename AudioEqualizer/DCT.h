@@ -18,7 +18,7 @@ public:
 
     //--------------------------------------------------------------
     //
-    Matrix transform( const Matrix& block );
+    Math::Matrix<double> transform( const Math::Matrix<double>& block );
 
     //--------------------------------------------------------------
     //
@@ -26,7 +26,7 @@ public:
 
     //--------------------------------------------------------------
     //
-    Matrix inverse_transform( const Matrix& block );
+    Math::Matrix<double> inverse_transform( const Math::Matrix<double>& block );
 
     //--------------------------------------------------------------
     //
@@ -37,6 +37,6 @@ private:
     //--------------------------------------------------------------
     //
     size_t sz_;
-    Matrix T;
-    Matrix T_t;
+    Math::Matrix<double> T;
+    Math::Matrix<double> T_t;
 };

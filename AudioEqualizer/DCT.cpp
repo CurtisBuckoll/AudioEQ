@@ -32,7 +32,7 @@ DCT::DCT( size_t mat_size )
 
 //========================================================================
 //
-Matrix DCT::transform( const Matrix& block )
+Math::Matrix<double> DCT::transform( const Math::Matrix<double>& block )
 {
     return T * block * T_t;
 }
@@ -46,7 +46,7 @@ std::vector<double> DCT::transform( const std::vector<double>& chunk )
 
 //========================================================================
 //
-Matrix DCT::inverse_transform( const Matrix& block )
+Math::Matrix<double> DCT::inverse_transform( const Math::Matrix<double>& block )
 {
     return T_t * block * T;
 }

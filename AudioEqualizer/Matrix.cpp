@@ -1,35 +1,40 @@
 #include "stdafx.h"
 
-#include "Matrix.h"
+#ifdef _MATRIX_
 
 #include <iostream>
 #include <iomanip>
 #include <math.h>
 
-#include <random>
-
-//========================================================================
-//
-int getRandomEntry(int min, int max)
+namespace Math
 {
-    std::random_device device;
-    std::mt19937 rng(device());
-    std::uniform_int_distribution<int> distribution(min, max);
 
-    return distribution(rng);
-}
+//#include <random>
+
+////========================================================================
+////
+//int getRandomEntry(int min, int max)
+//{
+//    std::random_device device;
+//    std::mt19937 rng(device());
+//    std::uniform_int_distribution<int> distribution(min, max);
+//
+//    return distribution(rng);
+//}
 
 //========================================================================
 //
-Matrix::Matrix( size_t size )
+template<typename T>
+Matrix<T>::Matrix( size_t size )
     : sz_( size )
 {
-    matrix_.resize( sz_, std::vector<double>( sz_, 0 ) );
+    matrix_.resize( sz_, std::vector<T>( sz_, T() ) );
 }
 
 //========================================================================
 //
-void Matrix::print()
+template<typename T>
+void Matrix<T>::print()
 {
     for( Uint i = 0; i < this->sz_; i++ )
     {
@@ -43,9 +48,10 @@ void Matrix::print()
 
 //========================================================================
 //
-void Matrix::transpose()
+template<typename T>
+void Matrix<T>::transpose()
 {
-    Matrix t_mat( this->sz_ );
+    Matrix<T> t_mat( this->sz_ );
 
     for( Uint i = 0; i < this->sz_; i++ )
     {
@@ -58,28 +64,30 @@ void Matrix::transpose()
     // OPT should be able to std::move the whole thing..
     //matrix_ = std::move( t_mat.matrix_ );
 
-    for ( Uint i = 0; i < this->sz_; ++i )
-    { 
+    for( Uint i = 0; i < this->sz_; ++i )
+    {
         matrix_[i] = t_mat.matrix_[i];
     }
 }
 
 //========================================================================
 //
-void Matrix::makeRandom( int low, int hi )
-{
-    for( Uint i = 0; i < this->sz_; i++ )
-    {
-        for( Uint j = 0; j < this->sz_; j++ )
-    	{
-            matrix_[i][j] = getRandomEntry( low, hi );
-    	}
-    }
-}
+//template<typename T>
+//void Matrix<T>::makeRandom( int low, int hi )
+//{
+//    for( Uint i = 0; i < this->sz_; i++ )
+//    {
+//        for( Uint j = 0; j < this->sz_; j++ )
+//    	{
+//            matrix_[i][j] = getRandomEntry( low, hi );
+//    	}
+//    }
+//}
 
 //========================================================================
 //
-void Matrix::scaleBy( double s )
+template<typename T>
+void Matrix<T>::scaleBy( double s )
 {
     for( Uint i = 0; i < this->sz_; i++ )
     {
@@ -92,7 +100,8 @@ void Matrix::scaleBy( double s )
 
 //========================================================================
 //
-Matrix Matrix::operator*( const Matrix& rhs )
+template<typename T>
+Matrix<T> Matrix<T>::operator*( const Matrix<T>& rhs )
 {
     if( rhs.sz_ != this->sz_ )
     {
@@ -100,13 +109,13 @@ Matrix Matrix::operator*( const Matrix& rhs )
         std::cout << "Matrix dimensions do not agree: " << this->sz_ << " " << rhs.sz_ << std::endl;
     }
 
-    Matrix result( this->sz_ );
+    Matrix<T> result( this->sz_ );
 
     for( Uint i = 0; i < this->sz_; i++ )
     {
         for( Uint j = 0; j < this->sz_; j++ )
         {
-            double sum = 0.0;
+            T sum = T();
             for( Uint k = 0; k < this->sz_; k++ )
             {
                 sum += this->matrix_[i][k] * rhs.matrix_[k][j];
@@ -120,7 +129,8 @@ Matrix Matrix::operator*( const Matrix& rhs )
 
 //========================================================================
 //
-std::vector<double> Matrix::operator*( const std::vector<double>& vec )
+template<typename T>
+std::vector<T> Matrix<T>::operator*( const std::vector<T>& vec )
 {
     if( this->sz_ != vec.size() )
     {
@@ -128,11 +138,11 @@ std::vector<double> Matrix::operator*( const std::vector<double>& vec )
         std::cout << "Matrix::operator* - Matrix dimensions do not agree with vector length: " << this->sz_ << " " << vec.size() << std::endl;
     }
 
-    std::vector<double> result( this->sz_, 0.0 );
+    std::vector<T> result( this->sz_, T() );
 
     for( Uint i = 0; i < this->sz_; i++ )
     {
-        double sum = 0.0;
+        T sum = T();
 
         for( Uint j = 0; j < this->sz_; j++ )
         {
@@ -144,3 +154,5 @@ std::vector<double> Matrix::operator*( const std::vector<double>& vec )
 
     return std::move( result );
 }
+}
+#endif

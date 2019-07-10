@@ -1,3 +1,3 @@
 #pragma once
 
-typedef unsigned int Uint;
+using Uint = unsigned int;

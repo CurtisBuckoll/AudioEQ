@@ -167,6 +167,7 @@
     <ClInclude Include="AudioOutputBuffer.h" />
     <ClInclude Include="Complex.h" />
     <ClInclude Include="DCT.h" />
+    <ClInclude Include="DFT.h" />
     <ClInclude Include="EQDraw.h" />
     <ClInclude Include="Equalizer.h" />
     <ClInclude Include="InputManager.h" />
@@ -186,6 +187,7 @@
     <ClCompile Include="AudioOutputBuffer.cpp" />
     <ClCompile Include="Complex.cpp" />
     <ClCompile Include="DCT.cpp" />
+    <ClCompile Include="DFT.cpp" />
     <ClCompile Include="EQDraw.cpp" />
     <ClCompile Include="Equalizer.cpp" />
     <ClCompile Include="InputManager.cpp" />
