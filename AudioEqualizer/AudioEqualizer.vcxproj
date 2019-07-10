@@ -165,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="AudioDevice.h" />
     <ClInclude Include="AudioOutputBuffer.h" />
+    <ClInclude Include="Complex.h" />
     <ClInclude Include="DCT.h" />
     <ClInclude Include="EQDraw.h" />
     <ClInclude Include="Equalizer.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="AudioDevice.cpp" />
     <ClCompile Include="AudioEqualizer.cpp" />
     <ClCompile Include="AudioOutputBuffer.cpp" />
+    <ClCompile Include="Complex.cpp" />
     <ClCompile Include="DCT.cpp" />
     <ClCompile Include="EQDraw.cpp" />
     <ClCompile Include="Equalizer.cpp" />

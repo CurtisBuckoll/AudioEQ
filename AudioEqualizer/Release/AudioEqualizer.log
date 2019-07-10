@@ -1,15 +1,8 @@
-﻿  AudioDevice.cpp
-c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\audiodevice.cpp(202): warning C4244: 'return': conversion from 'double' to 'Sint16', possible loss of data
-  AudioEqualizer.cpp
-c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\audioequalizer.cpp(15): warning C4305: 'initializing': truncation from 'double' to 'Real32'
-c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\audioequalizer.cpp(75): warning C4244: 'return': conversion from 'float' to 'Sint16', possible loss of data
-  AudioOutputBuffer.cpp
-  main.cpp
-c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\main.cpp(18): warning C4114: same type qualifier used more than once
-  WavFile.cpp
+﻿  main.cpp
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\main.cpp(25): warning C4114: same type qualifier used more than once
   Generating code
-  90 of 428 functions (21.0%) were compiled, the rest were copied from previous compilation.
-    17 functions were new in current compilation
-    43 functions had inline decision re-evaluated but remain unchanged
+  69 of 501 functions (13.8%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    10 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   AudioEqualizer.vcxproj -> C:\Users\Curtis\Documents\PortfolioProjects\AudioEqualizer\Release\AudioEqualizer.exe

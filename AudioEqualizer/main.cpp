@@ -9,6 +9,8 @@
 #include "EQDraw.h"
 #include "Equalizer.h"
 
+#include "Complex.h"
+
 // -----------------------------------------------------------------
 //
 
@@ -26,6 +28,11 @@ const char const* FILE_PATH = wav_files[0].c_str();
 //
 int main( int argc, char** argv )
 {
+    //math::Complex z;
+    //z.test();
+    //std::getchar();
+    //return 0;
+
     // Init the main window. This will also initialize SDL.
     std::unique_ptr<IWindow> window( new Window( kWIN_WIDTH, kWIN_HEIGHT ) );
     window->init();
