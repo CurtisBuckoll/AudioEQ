@@ -9,7 +9,7 @@
 #include "EQDraw.h"
 #include "Equalizer.h"
 
-#include "Complex.h"
+#include "DFT.h"
 
 // -----------------------------------------------------------------
 //
@@ -24,14 +24,17 @@ std::vector<std::string> wav_files = { "../resources/sine_sweep.wav",
 
 const char const* FILE_PATH = wav_files[0].c_str();
 
-// -----------------------------------------------------------------
+void test();
+
+//========================================================================
 //
 int main( int argc, char** argv )
 {
-    //math::Complex z;
-    //z.test();
-    //std::getchar();
-    //return 0;
+    // =================================================================
+    // Add test code in here, comment out for regular execution.
+    //test();
+    // =================================================================
+    
 
     // Init the main window. This will also initialize SDL.
     std::unique_ptr<IWindow> window( new Window( kWIN_WIDTH, kWIN_HEIGHT ) );
@@ -101,6 +104,24 @@ int main( int argc, char** argv )
     window->close();
 
     return 0;
+}
+
+//========================================================================
+//
+void test()
+{
+    std::cout << "=== COMPLEX CLASS ===============================================\n" << std::endl;
+
+    Math::Complex z;
+    z.test();
+
+    std::cout << "\n=== DFT MATRIX ==================================================\n" << std::endl;
+
+    DFT dft( 4 );
+    dft.test();
+
+    std::getchar();
+    exit( 0 );
 }
 
 //int main( int argc, char** argv )

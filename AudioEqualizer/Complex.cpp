@@ -41,7 +41,7 @@ double Complex::magnitude()
 
 //========================================================================
 // (a+ib)(c+id) = (ac - bd) + i(ad + bc)
-Complex Complex::operator*( const Complex& rhs )
+Complex Complex::operator*( const Complex& rhs ) const
 {
     Complex res;
     res._re = _re * rhs.re() - _im * rhs.im();
@@ -51,7 +51,17 @@ Complex Complex::operator*( const Complex& rhs )
 
 //========================================================================
 //
-Complex Complex::operator+( const Complex& rhs )
+Complex Complex::operator*( double rhs ) const
+{
+    Complex res;
+    res._re = _re * rhs;
+    res._im = _im * rhs;
+    return std::move( res );
+}
+
+//========================================================================
+//
+Complex Complex::operator+( const Complex& rhs ) const
 {
     Complex res;
     res._re = _re + rhs.re();
@@ -61,7 +71,7 @@ Complex Complex::operator+( const Complex& rhs )
 
 //========================================================================
 //
-Complex Complex::operator-( const Complex& rhs )
+Complex Complex::operator-( const Complex& rhs ) const
 {
     Complex res;
     res._re = _re - rhs.re();
@@ -125,4 +135,5 @@ void Complex::test()
 
     std::cout << "( 3 + 2i )( 1 + 7i ) = "; print( Complex( 3, 2 ) * Complex( 1, 7 ) );
 }
+
 }

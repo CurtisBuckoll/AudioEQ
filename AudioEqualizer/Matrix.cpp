@@ -33,18 +33,18 @@ Matrix<T>::Matrix( size_t size )
 
 //========================================================================
 //
-template<typename T>
-void Matrix<T>::print()
-{
-    for( Uint i = 0; i < this->sz_; i++ )
-    {
-        for( Uint j = 0; j < this->sz_; j++ )
-        {
-            std::cout << std::setprecision( 4 ) << matrix_[i][j] << "\t";
-        }
-        std::cout << std::endl;
-    }
-}
+//template<typename T>
+//void Matrix<T>::print()
+//{
+//    for( Uint i = 0; i < this->sz_; i++ )
+//    {
+//        for( Uint j = 0; j < this->sz_; j++ )
+//        {
+//            std::cout << std::setprecision( 4 ) << matrix_[i][j] << "\t";
+//        }
+//        std::cout << std::endl;
+//    }
+//}
 
 //========================================================================
 //
@@ -101,7 +101,7 @@ void Matrix<T>::scaleBy( double s )
 //========================================================================
 //
 template<typename T>
-Matrix<T> Matrix<T>::operator*( const Matrix<T>& rhs )
+Matrix<T> Matrix<T>::operator*( const Matrix<T>& rhs ) const
 {
     if( rhs.sz_ != this->sz_ )
     {
@@ -130,7 +130,7 @@ Matrix<T> Matrix<T>::operator*( const Matrix<T>& rhs )
 //========================================================================
 //
 template<typename T>
-std::vector<T> Matrix<T>::operator*( const std::vector<T>& vec )
+std::vector<T> Matrix<T>::operator*( const std::vector<T>& vec ) const
 {
     if( this->sz_ != vec.size() )
     {
@@ -154,5 +154,23 @@ std::vector<T> Matrix<T>::operator*( const std::vector<T>& vec )
 
     return std::move( result );
 }
+
+//========================================================================
+//
+template<typename T>
+std::vector<T>& Matrix<T>::operator[]( size_t row )
+{
+    return matrix_[row];
 }
+
+//========================================================================
+//
+template<typename T>
+const std::vector<T>& Matrix<T>::operator[]( size_t row ) const
+{
+    return matrix_[row];
+}
+
+}
+
 #endif

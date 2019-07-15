@@ -19,25 +19,33 @@ public:
 
     //--------------------------------------------------------------
     //
-    Math::Matrix<Math::Complex> transform( const Math::Matrix<Math::Complex>& block );
+    std::vector<Math::Complex> transform( const std::vector<Math::Complex>& signal );
 
     //--------------------------------------------------------------
     //
-    std::vector<Math::Complex> transform( const std::vector<Math::Complex> & chunk );
+    std::vector<Math::Complex> inverse_transform( const std::vector<Math::Complex>& signal );
 
     //--------------------------------------------------------------
     //
-    Math::Matrix<Math::Complex> inverse_transform( const Math::Matrix<Math::Complex>& block );
+    void print( const Math::Matrix<Math::Complex>& M ) const;
 
     //--------------------------------------------------------------
     //
-    std::vector<Math::Complex> inverse_transform( const std::vector<Math::Complex>& chunk );
+    void test() const;
 
 private:
 
     //--------------------------------------------------------------
     //
+    DFT() = delete;
+
+    //--------------------------------------------------------------
+    //
+    void fillMatrix( Math::Complex omega, Math::Matrix<Math::Complex>& M );
+
+    //--------------------------------------------------------------
+    //
     size_t sz_;
     Math::Matrix<Math::Complex> T;
-    Math::Matrix<Math::Complex> T_t;
+    Math::Matrix<Math::Complex> T_inv;
 };

@@ -31,15 +31,23 @@ struct Matrix
 
     //--------------------------------------------------------------
     //
-    void print();
+    //void print();
 
     //--------------------------------------------------------------
     //
-    Matrix operator*( const Matrix<T>& mat );
+    Matrix operator*( const Matrix<T>& mat ) const;
 
     //--------------------------------------------------------------
     //
-    std::vector<T> operator*( const std::vector<T>& vec );
+    std::vector<T> operator*( const std::vector<T>& vec ) const;
+
+    //--------------------------------------------------------------
+    //
+    std::vector<T>& operator[]( size_t row );
+
+    //--------------------------------------------------------------
+    //
+    const std::vector<T>& operator[]( size_t row ) const;
 
     //--------------------------------------------------------------
     //

@@ -7,7 +7,6 @@
 // 
 class Equalizer
 {
-
 public:
 
     //--------------------------------------------------------------
@@ -54,4 +53,3 @@ private:
     DCT                 _dct;
     std::vector<double> _current_coeffs;
 };
-
