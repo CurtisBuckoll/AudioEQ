@@ -16,7 +16,7 @@
 
 static const int kWIN_WIDTH = 600;
 static const int kWIN_HEIGHT = 400;
-static const int kNUM_EQ_SAMPLES = 64;
+static const int kNUM_EQ_SAMPLES = 512;
 
 std::vector<std::string> wav_files = { "../resources/sine_sweep.wav",
                                        "../resources/sample_piano",

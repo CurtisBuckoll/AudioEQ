@@ -5,7 +5,7 @@
 #include "WavFile.h"
 
 #include "AudioOutputBuffer.h"
-#include "Equalizer.h"
+#include "EqualizerDFT.h"
 
 // =======================================================================
 //
@@ -59,7 +59,7 @@ struct AudioBuffer
     AudioConfig*      _audio_config;
     InputBuffer       _input_buffer;
     AudioOutputBuffer _output_buffer;
-    Equalizer         _equalizer;
+    EqualizerDFT      _equalizer;
 };
 
 // =======================================================================
