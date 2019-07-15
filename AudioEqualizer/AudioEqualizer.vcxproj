@@ -132,6 +132,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,6 +152,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -162,7 +164,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="AudioDevice.h" />
+    <ClInclude Include="AudioOutputBuffer.h" />
+    <ClInclude Include="Complex.h" />
     <ClInclude Include="DCT.h" />
+    <ClInclude Include="DFT.h" />
     <ClInclude Include="EQDraw.h" />
     <ClInclude Include="Equalizer.h" />
     <ClInclude Include="InputManager.h" />
@@ -179,7 +184,10 @@
   <ItemGroup>
     <ClCompile Include="AudioDevice.cpp" />
     <ClCompile Include="AudioEqualizer.cpp" />
+    <ClCompile Include="AudioOutputBuffer.cpp" />
+    <ClCompile Include="Complex.cpp" />
     <ClCompile Include="DCT.cpp" />
+    <ClCompile Include="DFT.cpp" />
     <ClCompile Include="EQDraw.cpp" />
     <ClCompile Include="Equalizer.cpp" />
     <ClCompile Include="InputManager.cpp" />

@@ -1,13 +1,16 @@
-#pragma once
-
-#include "stdafx.h"
+#ifndef _MATRIX_
+#define _MATRIX_
 
 #include "Util.h"
 
 #include <vector>
 
+namespace Math
+{
+
 //========================================================================
 // n x n square matrix
+template<typename T>
 struct Matrix
 {
     //--------------------------------------------------------------
@@ -24,22 +27,34 @@ struct Matrix
 
     //--------------------------------------------------------------
     //
-    void makeRandom( int low, int hi );
+    //void makeRandom( int low, int hi );
 
     //--------------------------------------------------------------
     //
-    void print();
+    //void print();
 
     //--------------------------------------------------------------
     //
-    Matrix operator*( const Matrix& mat );
+    Matrix operator*( const Matrix<T>& mat ) const;
 
     //--------------------------------------------------------------
     //
-    std::vector<double> operator*( const std::vector<double>& vec );
+    std::vector<T> operator*( const std::vector<T>& vec ) const;
 
     //--------------------------------------------------------------
     //
-    size_t                           sz_;
-    std::vector<std::vector<double>> matrix_;
+    std::vector<T>& operator[]( size_t row );
+
+    //--------------------------------------------------------------
+    //
+    const std::vector<T>& operator[]( size_t row ) const;
+
+    //--------------------------------------------------------------
+    //
+    size_t                      sz_;
+    std::vector<std::vector<T>> matrix_;
 };
+}
+
+#include "Matrix.cpp"
+#endif

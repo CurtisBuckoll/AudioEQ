@@ -29,8 +29,12 @@
 using namespace std;
 
 /* constructor */
-WavFile::WavFile()
+//WavFile::WavFile() { vectorized_audio_.push_back( std::vector<double>( kCHUNK_SIZE, 0.0 ) ); }
+
+WavFile::WavFile( size_t chunk_sz )
+    : kCHUNK_SIZE( chunk_sz )
 {
+    _vectorized_audio.push_back( std::vector<double>() );
 
 #ifdef  DEBUG
     printf( "\ninside WavFile()" );
@@ -381,6 +385,13 @@ int WavFile::openWavFile( const char* fileName )
         for( i = 0; i < maxInSamples; i++ )
         {
             gWavDataIn[i] = (double)( pU[i] );
+
+            _vectorized_audio.back().push_back( pU[i] );
+            if( _vectorized_audio.back().size() == kCHUNK_SIZE )
+            {
+                _vectorized_audio.push_back( std::vector<double>() );
+                //vectorized_audio_.reserve( kCHUNK_SIZE );
+            }
         }
     }
     else
@@ -389,7 +400,20 @@ int WavFile::openWavFile( const char* fileName )
         for( i = 0; i < maxInSamples; i++ )
         {
             gWavDataIn[i] = (double)( pC[i] );
+
+            _vectorized_audio.back().push_back( pC[i] );
+            if( _vectorized_audio.back().size() == kCHUNK_SIZE )
+            {
+                _vectorized_audio.push_back( std::vector<double>() );
+                //vectorized_audio_.reserve( kCHUNK_SIZE );
+            }
         }
+    }
+
+    // Fill remaining of vector with 0's
+    while( _vectorized_audio.back().size() < kCHUNK_SIZE )
+    {
+        _vectorized_audio.back().push_back( 0.0 );
     }
 
 #ifdef  DEBUG11

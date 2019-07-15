@@ -28,6 +28,8 @@
 #endif     /* -----  not CONST84  ----- */
 
 
+#include <vector>
+
 /*
 * =====================================================================================
 *        Class:  WavFile
@@ -46,13 +48,20 @@ private:
     bool isClose;
     char* fileName;
 
+    size_t kCHUNK_SIZE;
+
 public:
 
     // ****** TEMP!!!!
     double* get_raw_data_pointer();
 
+    std::vector<std::vector<double>> _vectorized_audio;
+
     /* ====================  LIFECYCLE     ======================================= */
-    WavFile();                             /* constructor      */
+
+    // should DEFINITELY remove this default constructor later!!
+    WavFile() = delete;
+    WavFile( size_t chunk_sz );                             /* constructor      */
     //WavFile ( char* fileName );   /* copy constructor */
     ~WavFile();                            /* destructor       */
 
