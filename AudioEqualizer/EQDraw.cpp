@@ -1,10 +1,13 @@
 #include "stdafx.h"
 
 #include "EQDraw.h"
+
 #include "InputManager.h"
+#include "Line.h"
 
 #include <array>
 #include <algorithm>
+#include <cmath>
 
 // delete later
 #include <iostream>
@@ -98,21 +101,32 @@ void EQDraw::processUserInput( bool* keys )
 // fit the window or some parameterized size.
 void EQDraw::drawToWindow()
 {
-    vec2 prev( 0.0, eq_coeffs_[0] + ( window_.getHeight() / 2 ) );
+    if( update_curve_ )
+    {
+        // This will be true when user interaction has occured with the
+        // curve parameters, so we must update.
+        updateEQCoeffs();
+        update_curve_ = false;
+    }
+
+    vec2 prev( 0.0, eq_coeffs_[0] + static_cast<double>( window_.getHeight() / 2 ) );
 
     for( size_t i = 1; i < eq_coeffs_.size(); ++i )
     {
         vec2 next( ( i / static_cast<double>(eq_coeffs_.size()) ) * window_.getWidth(), ( window_.getHeight() / 2 ) + eq_coeffs_[i] );
 
-        drawLine( prev, next, kEQ_CURVE_COLOUR );
+        //drawLine( prev, next, kEQ_CURVE_COLOUR );
+        Line::antialiased( prev, next, kEQ_CURVE_COLOUR, window_ );
 
         prev = next;
     }
+
+    //drawLine( vec2( 0.0, 0.0 ), vec2( 300, 200 ), kEQ_CURVE_COLOUR );
 }
 
 // -------------------------------------------------------------
 //
-void EQDraw::drawSpectrumTowindow(const std::vector<double>& freq_spectrum)
+void EQDraw::drawSpectrumTowindow( const std::vector<double>& freq_spectrum )
 {
     vec2 prev( 0.0, 0.0 );
 
@@ -121,7 +135,8 @@ void EQDraw::drawSpectrumTowindow(const std::vector<double>& freq_spectrum)
         vec2 next( ( i / static_cast<double>( freq_spectrum.size() ) ) * window_.getWidth(), 
                      std::abs( freq_spectrum[i] ) / kFREQ_SPECTRUM_HEIGHT_DAMPENING );
 
-        drawLine( prev, next, kSPECTRUM_ANALYSIS_COLOUR );
+        //drawLine( prev, next, kSPECTRUM_ANALYSIS_COLOUR );
+        Line::antialiased( prev, next, kSPECTRUM_ANALYSIS_COLOUR, window_ );
 
         prev = next;
     }
@@ -154,6 +169,8 @@ void EQDraw::updateEQCoeffs()
 //
 void EQDraw::drawLine( const vec2& p1, const vec2& p2, Color256 colour )
 {
+    static const double line_width = 3.0;
+
     if( update_curve_ )
     {
         // This will be true when user interaction has occured with the
@@ -168,6 +185,20 @@ void EQDraw::drawLine( const vec2& p1, const vec2& p2, Color256 colour )
     //}
 
     double slope = static_cast<double>( p2.y_ - p1.y_ ) / static_cast<double>( p2.x_ - p1.x_ );
+    
+    // n := the normal to the line.
+    vec2 n( p1.y_ - p2.y_, p2.x_ - p1.x_ );
+    n.normalize();
+
+    //std::cout << n.dot( vec2( p2.x_ - p1.x_, p2.y_ - p1.y_ ) ) << std::endl;
+    //std::cout << n.len() << std::endl;
+
+    // d is direction of line.
+    vec2 d( ( p2.x_ - p1.x_ ), ( p2.y_ - p1.y_ ) );
+    d.normalize();
+    
+    // p is a point on the line.
+    vec2 p = vec2( p1.x_ - 20.0 * d.x_, p1.y_ - 20.0 * d.y_ );
 
     if( slope >= 0.0 )
     {
@@ -186,7 +217,49 @@ void EQDraw::drawLine( const vec2& p1, const vec2& p2, Color256 colour )
             double y = p1.y_;
             for( int x = static_cast<int>( std::round( p1.x_ ) ); x < static_cast<int>( std::round( p2.x_ ) ); ++x )
             {
-                window_.setPixel( x, static_cast<int>( std::round<int>( y ) ), colour );
+                vec2 v( x - p.x_, y - p.y_ );
+                double dist_scalar = std::abs( n.dot( v ) );
+                if( dist_scalar <= line_width )
+                {
+                    double dissolve_factor = 1.0 - ( dist_scalar / line_width );
+                    window_.setPixel( std::round( x ), static_cast<int>( std::round<int>( y ) ), colour );
+                }
+
+                // Set pixel above and below.
+                v = vec2( x - p.x_, y + 1 - p.y_ );
+                dist_scalar = std::abs( n.dot( v ) );
+                if( dist_scalar <= line_width )
+                {
+                    double dissolve_factor = 1.0 - ( dist_scalar / line_width );
+                    //std::cout << dissolve_factor << std::endl;
+                    window_.setPixel( std::round( x ), static_cast<int>( std::round( y + 1 ) ), colour * dissolve_factor );
+                }
+
+                v = vec2( x - p.x_, y - 1 - p.y_ );
+                dist_scalar = std::abs( n.dot( v ) );
+                if( dist_scalar <= line_width )
+                {
+                    double dissolve_factor = 1.0 - ( dist_scalar / line_width );
+                    window_.setPixel( std::round( x ), static_cast<int>( std::round( y - 1 ) ), colour * dissolve_factor );
+                }
+                
+                v = vec2( x - p.x_, y + 2 - p.y_ );
+                dist_scalar = std::abs( n.dot( v ) );
+                if( dist_scalar <= line_width )
+                {
+                    double dissolve_factor = 1.0 - ( dist_scalar / line_width );
+                    //std::cout << dissolve_factor << std::endl;
+                    window_.setPixel( std::round( x ), static_cast<int>( std::round( y + 2 ) ), colour * dissolve_factor );
+                }
+
+                v = vec2( x - p.x_, y - 2 - p.y_ );
+                dist_scalar = std::abs( n.dot( v ) );
+                if( dist_scalar <= line_width )
+                {
+                    double dissolve_factor = 1.0 - ( dist_scalar / line_width );
+                    window_.setPixel( std::round( x ), static_cast<int>( std::round( y - 2 ) ), colour * dissolve_factor );
+                }
+
                 y += slope;
             }
 
@@ -209,7 +282,7 @@ void EQDraw::drawLine( const vec2& p1, const vec2& p2, Color256 colour )
             double y = p1.y_;
             for( int x = static_cast<int>( std::round( p1.x_ ) ); x < static_cast<int>( std::round( p2.x_ ) ); ++x )
             {
-                window_.setPixel( x, static_cast<int>( std::round<int>( y ) ), colour );
+                window_.setPixel( std::round( x ), static_cast<int>( std::round<int>( y ) ), colour );
                 y += slope;
             }
 

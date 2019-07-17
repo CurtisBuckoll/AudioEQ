@@ -112,7 +112,7 @@ void Window::setPixel( int x, int y, Color256 color )
 
     if( static_cast<size_t>( offset ) >= _pixels.size() )
 	{
-        //std::cout << "Out of range: " << offset << " " << _pixels.size() << std::endl;
+        //std::cout << "setPixel of range: " << offset << " " << _pixels.size() << std::endl;
         return;
 	}
 
@@ -120,6 +120,25 @@ void Window::setPixel( int x, int y, Color256 color )
 	_pixels[offset + 1] = color.g;       
 	_pixels[offset + 2] = color.r;       
 	_pixels[offset + 3] = SDL_ALPHA_OPAQUE;
+}
+
+//========================================================================
+//
+Color256 Window::getPixel( int x,
+                           int y ) const
+{
+    int Y = -( y - _height + 1 );
+    int offset = ( _width * 4 * Y ) + x * 4;
+
+    Color256 pixel( 0, 0, 0 );
+
+    if( static_cast<size_t>( offset ) >= _pixels.size() )
+    {
+        //std::cout << "getPixel of range: " << offset << " " << _pixels.size() << std::endl;
+        return Color256( 0, 0, 0 );
+    }
+
+    return Color256( _pixels[offset + 2], _pixels[offset + 1], _pixels[offset] );
 }
 
 //========================================================================

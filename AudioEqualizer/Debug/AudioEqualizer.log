@@ -1,8 +1,16 @@
-﻿  AudioDevice.cpp
-c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\audiodevice.cpp(208): warning C4244: 'return': conversion from 'double' to 'Sint16', possible loss of data
-  DFT.cpp
-  EqualizerDFT.cpp
-  main.cpp
-c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\main.cpp(25): warning C4114: same type qualifier used more than once
-  Generating Code...
+﻿  EQDraw.cpp
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(102): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(106): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(118): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(123): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(122): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(176): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(200): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(203): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(209): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(209): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(212): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(217): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(217): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(242): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   AudioEqualizer.vcxproj -> C:\Users\Curtis\Documents\PortfolioProjects\AudioEqualizer\Debug\AudioEqualizer.exe

@@ -10,6 +10,7 @@
 #include "Equalizer.h"
 
 #include "DFT.h"
+#include "EqualizerDFT.h"
 
 // -----------------------------------------------------------------
 //
@@ -58,7 +59,9 @@ int main( int argc, char** argv )
 
     InputManager input_manager;
 
-    AudioDevice audio_device( std::move(wav_file._vectorized_audio), kNUM_EQ_SAMPLES );
+    EqualizerDFT dft(kNUM_EQ_SAMPLES);
+
+    AudioDevice audio_device( std::move(wav_file._vectorized_audio), kNUM_EQ_SAMPLES, dft );
     audio_device.setPlayState( DEVICE_STATE::PLAY );
 
     size_t chunk_index = 0;

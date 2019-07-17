@@ -1,11 +1,11 @@
 #pragma once
 
-#include <vector>
+#include "IEqualizer.h"
 #include "DFT.h"
 
 // =======================================================================
 // 
-class EqualizerDFT
+class EqualizerDFT : public IEqualizer
 {
 public:
 
@@ -21,7 +21,7 @@ public:
     //
     void eq( const std::vector<double>& in,
              std::vector<double>& out,
-             bool save_coefficients );
+             bool save_coefficients ) override;
 
     //--------------------------------------------------------------
     //
@@ -31,15 +31,15 @@ public:
 
     //--------------------------------------------------------------
     //
-    void getCurrentSpectrum( std::vector<double>& coeffs );
+    void getCurrentSpectrum( std::vector<double>& coeffs ) override;
 
     //--------------------------------------------------------------
     //
-    void resetSpectrum();
+    void resetSpectrum() override;
 
     //--------------------------------------------------------------
     //
-    void normalizeSpectrum( const size_t total_iterations );
+    void normalizeSpectrum( const size_t total_iterations ) override;
 
 private:
 

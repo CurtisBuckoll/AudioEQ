@@ -1,6 +1,27 @@
-﻿  EqualizerDFT.cpp
+﻿  Line.cpp
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(33): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(53): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(54): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(55): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(65): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(69): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(73): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(77): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(81): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(85): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(89): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(93): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(106): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(110): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(114): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(118): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(122): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(126): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(130): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(134): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(269): warning C4101: 'coverage': unreferenced local variable
   Generating code
-  3 of 660 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
+  4 of 698 functions ( 0.6%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

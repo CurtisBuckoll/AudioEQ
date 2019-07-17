@@ -32,9 +32,12 @@ public:
     //
     std::vector<double> inverse_transform( const std::vector<double>& chunk );
 
+    //--------------------------------------------------------------
+    //
+    DCT() = delete;
+
 private:
 
-    DCT() = delete;
 
     //--------------------------------------------------------------
     //
