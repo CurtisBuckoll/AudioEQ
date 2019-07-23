@@ -116,7 +116,7 @@ void EQDraw::drawToWindow()
         vec2 next( ( i / static_cast<double>(eq_coeffs_.size()) ) * window_.getWidth(), ( window_.getHeight() / 2 ) + eq_coeffs_[i] );
 
         //drawLine( prev, next, kEQ_CURVE_COLOUR );
-        Line::antialiased( prev, next, kEQ_CURVE_COLOUR, window_ );
+        Line::getInstance().antialiased( prev, next, kEQ_CURVE_COLOUR, window_ );
 
         prev = next;
     }
@@ -136,7 +136,7 @@ void EQDraw::drawSpectrumTowindow( const std::vector<double>& freq_spectrum )
                      std::abs( freq_spectrum[i] ) / kFREQ_SPECTRUM_HEIGHT_DAMPENING );
 
         //drawLine( prev, next, kSPECTRUM_ANALYSIS_COLOUR );
-        Line::antialiased( prev, next, kSPECTRUM_ANALYSIS_COLOUR, window_ );
+        Line::getInstance().antialiased( prev, next, kSPECTRUM_ANALYSIS_COLOUR, window_ );
 
         prev = next;
     }

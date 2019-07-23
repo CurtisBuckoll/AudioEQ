@@ -25,12 +25,6 @@ public:
 
     //--------------------------------------------------------------
     //
-    //void eqChunks( const std::vector<std::vector<double>>& chunks_in,
-    //               std::vector<std::vector<double>>& chunks_out,
-    //               bool save_coefficients );
-
-    //--------------------------------------------------------------
-    //
     void getCurrentSpectrum( std::vector<double>& coeffs ) override;
 
     //--------------------------------------------------------------

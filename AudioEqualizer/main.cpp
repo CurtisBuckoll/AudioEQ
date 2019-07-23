@@ -11,16 +11,17 @@
 
 #include "DFT.h"
 #include "EqualizerDFT.h"
+#include "EqualizerDCT.h"
 
 // -----------------------------------------------------------------
 //
 
 static const int kWIN_WIDTH = 600;
 static const int kWIN_HEIGHT = 400;
-static const int kNUM_EQ_SAMPLES = 512;
+static const int kNUM_EQ_SAMPLES = 128;
 
 std::vector<std::string> wav_files = { "../resources/sine_sweep.wav",
-                                       "../resources/sample_piano",
+                                       "../resources/sample_piano.wav",
                                        "../resources/Q2_sample_2.wav" };
 
 const char const* FILE_PATH = wav_files[0].c_str();
@@ -60,6 +61,7 @@ int main( int argc, char** argv )
     InputManager input_manager;
 
     EqualizerDFT dft(kNUM_EQ_SAMPLES);
+    EqualizerDCT dct( kNUM_EQ_SAMPLES );
 
     AudioDevice audio_device( std::move(wav_file._vectorized_audio), kNUM_EQ_SAMPLES, dft );
     audio_device.setPlayState( DEVICE_STATE::PLAY );

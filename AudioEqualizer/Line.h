@@ -9,6 +9,8 @@
 
 class IWindow;
 
+static const size_t kLUT_SIZE = 2000;
+
 //========================================================================
 //
 struct vec2 {
@@ -80,5 +82,39 @@ struct vec2 {
 class Line
 {
 public:
-    static void antialiased( vec2 p0, vec2 p1, Color256 color, IWindow& window );
+
+    // -------------------------------------------------------------
+    //
+    void antialiased( vec2 p0, 
+                      vec2 p1, 
+                      Color256 color, 
+                      IWindow& window );
+
+    // -------------------------------------------------------------
+    //
+    static Line& getInstance() 
+    {
+        static Line instance( kLUT_SIZE );
+        return instance;
+    }
+
+    // -------------------------------------------------------------
+    // Delete these to enforce singleton.
+    Line( Line const& )           = delete;
+    void operator=( Line const& ) = delete;
+
+private:
+
+    // -------------------------------------------------------------
+    //
+    Line( size_t area_lut_sz );
+
+    // -------------------------------------------------------------
+    //
+    ~Line();
+
+    // -------------------------------------------------------------
+    //
+    double* area_lookup_;
+    size_t  lut_sz_;
 };

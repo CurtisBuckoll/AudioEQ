@@ -19,10 +19,10 @@ c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.c
 c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(126): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(130): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(134): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(269): warning C4101: 'coverage': unreferenced local variable
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(314): warning C4101: 'coverage': unreferenced local variable
   Generating code
-  4 of 698 functions ( 0.6%) were compiled, the rest were copied from previous compilation.
+  1 of 704 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+    2 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   AudioEqualizer.vcxproj -> C:\Users\Curtis\Documents\PortfolioProjects\AudioEqualizer\Release\AudioEqualizer.exe

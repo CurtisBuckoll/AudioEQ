@@ -3,6 +3,9 @@
 
 #include <cmath>
 
+// We need this so we don't take log of a number too close to 0.
+static const double kMAGNITUDE_THRESH = 0.01;
+
 //========================================================================
 //
 EqualizerDFT::EqualizerDFT( size_t chunk_size )
@@ -93,7 +96,15 @@ void EqualizerDFT::getCurrentSpectrum( std::vector<double>& coeffs )
 
     for( size_t i = 0; i < _chunk_size; ++i )
     {
-        coeffs.push_back( std::log2(_current_coeffs[i].magnitude()) * 800 );
+        double magnitude = _current_coeffs[i].magnitude();
+        if( magnitude > kMAGNITUDE_THRESH )
+        {
+            coeffs.push_back( std::log2( magnitude ) * 800 );
+        }
+        else
+        {
+            coeffs.push_back( 0.0 );
+        }
     }
 }
 
