@@ -28,10 +28,12 @@ struct AudioBuffer
     //
     AudioBuffer( std::vector<std::vector<double>>&& data,
                  size_t chunk_size,
-                 IEqualizer& eq )
+                 IEqualizer& eq,
+                 const std::vector<double>& eq_coeffs)
         : _output_buffer( chunk_size )
         , _input_buffer( std::move( data ) )
         , _equalizer( eq )
+        , _eq_coeffs( eq_coeffs )
     {};
 
     // -----------------------------------------------------------------
@@ -72,6 +74,7 @@ struct AudioBuffer
     InputBuffer       _input_buffer;
     AudioOutputBuffer _output_buffer;
     IEqualizer&       _equalizer;
+    const std::vector<double>& _eq_coeffs;
 };
 
 // =======================================================================
@@ -101,7 +104,8 @@ public:
     // Takes ownership of the buffer supplied.
     AudioDevice( std::vector<std::vector<double>>&& data,
                  size_t chunk_size,
-                 IEqualizer& eq );
+                 IEqualizer& eq,
+                 const std::vector<double>& eq_coeffs );
 
     // -----------------------------------------------------------------
     //

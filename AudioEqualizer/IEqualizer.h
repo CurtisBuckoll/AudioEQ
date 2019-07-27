@@ -16,6 +16,7 @@ public:
     //
     virtual void eq( const std::vector<double>& in,
                      std::vector<double>& out,
+                     const std::vector<double>& eq_coeffs,
                      bool save_coefficients ) = 0;
 
     //--------------------------------------------------------------

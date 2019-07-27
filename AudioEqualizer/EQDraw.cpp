@@ -36,7 +36,7 @@ EQDraw::EQDraw( IWindow& window, const size_t num_samples )
     , eq_gain_scale_( 0.0 )
     , q_scale( ( kMIN_Q + kMAX_Q ) / 2.0 )
     , update_curve_( false )
-    , EQ_MOVE_PEAK_SPEED( 0.05 * std::log2( num_samples ) )
+    , EQ_MOVE_PEAK_SPEED( 0.005 * std::log2( num_samples ) )
 {
     //eq_center_ = static_cast<double>( window.getWidth() / 2 );
     eq_center_ = static_cast<double>( eq_sample_sz_ / 2 );
@@ -94,6 +94,13 @@ void EQDraw::processUserInput( bool* keys )
         update_curve_ = true;
         keys[kWHEEL_DOWN] = false;
     }
+}
+
+// =======================================================================
+//
+const std::vector<double>& EQDraw::getEqCoeffsBuffer() const
+{
+    return eq_coeffs_;
 }
 
 // =======================================================================

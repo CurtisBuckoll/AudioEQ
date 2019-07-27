@@ -23,8 +23,9 @@ EqualizerDCT::~EqualizerDCT()
 //========================================================================
 //
 void EqualizerDCT::eq( const std::vector<double>& in,
-                    std::vector<double>& out,
-                    bool save_coefficients )
+                       std::vector<double>& out,
+                       const std::vector<double>& eq_coeffs,
+                       bool save_coefficients )
 {
     out = _dct.transform( in );
 

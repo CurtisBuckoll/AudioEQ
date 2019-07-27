@@ -27,6 +27,7 @@ EqualizerDFT::~EqualizerDFT()
 //
 void EqualizerDFT::eq( const std::vector<double>& in,
                        std::vector<double>& out,
+                       const std::vector<double>& eq_coeffs,
                        bool save_coefficients )
 {
     // Extract real part of signal.
@@ -41,6 +42,10 @@ void EqualizerDFT::eq( const std::vector<double>& in,
     std::vector<Math::Complex> transformed = std::move( _dft.transform( signal_as_complex ) );
 
     // Process here //
+    for( Uint i = 0; i < transformed.size(); ++i )
+    {
+        transformed[i] = transformed[i] * (1.0 / 20.0 * std::pow( 10, eq_coeffs[i] / 100.0 ));
+    }
 
     // Accumulate spectrum coefficients.
     if( save_coefficients )

@@ -29,9 +29,12 @@ auto read_func_callback = []( void* user_data, Uint8* device_buffer, int length 
 
 // =======================================================================
 //
-AudioDevice::AudioDevice( std::vector<std::vector<double>>&& data, size_t chunk_size, IEqualizer& eq )
+AudioDevice::AudioDevice( std::vector<std::vector<double>>&& data, 
+                          size_t chunk_size, 
+                          IEqualizer& eq,
+                          const std::vector<double>& eq_coeffs )
     : _audio_thread( nullptr )
-    , _audio_buffer( std::move( data ), chunk_size, eq )
+    , _audio_buffer( std::move( data ), chunk_size, eq, eq_coeffs )
 {
     // Capture the input data
 
@@ -93,7 +96,7 @@ void processAudioToOutputBuffer( AudioBuffer* audio_buffer )
         if( !input_buffer.outOfData() )
         {      
             std::vector<double> processed;
-            audio_buffer->_equalizer.eq( std::move( input_buffer.getNextChunk() ), processed, true );
+            audio_buffer->_equalizer.eq( std::move( input_buffer.getNextChunk() ), processed, audio_buffer->_eq_coeffs, true );
 
             // ************************************************************************************************
             // SHOULD ADD A SET OR ADD FLAG TO ABOVE ^^^^ !!
