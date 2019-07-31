@@ -40,7 +40,11 @@ private:
 
     //--------------------------------------------------------------
     //
-    std::vector<Math::Complex> fft(std::vector<Math::Complex> signal);
+    std::vector<Math::Complex> fft( std::vector<Math::Complex> signal );
+    
+    //--------------------------------------------------------------
+    //
+    std::vector<Math::Complex> ifft( std::vector<Math::Complex> signal );
 
     //--------------------------------------------------------------
     //

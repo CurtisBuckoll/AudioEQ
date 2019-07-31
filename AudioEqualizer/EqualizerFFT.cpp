@@ -75,6 +75,58 @@ std::vector<Math::Complex> EqualizerFFT::fft( std::vector<Math::Complex> signal 
     return std::move( result );
 }
 
+//========================================================================
+// Always expect size of input vector to be even, in particular, a power 
+// of two.
+std::vector<Math::Complex> EqualizerFFT::ifft( std::vector<Math::Complex> signal )
+{
+    // Base case:
+    if( signal.size() == 1 )
+    {
+        return std::move( signal );
+    }
+    //if( signal.size() <= 2 )
+    //{
+    //    std::vector<Math::Complex> base_result( 2, Math::Complex(0.0, 0.0) );
+    //    base_result[0] = signal[0] + signal[1];
+    //    base_result[1] = signal[0] - signal[1];
+    //    return base_result;
+    //}
+
+    // General case:
+    // Form two vectors containing even/odd indices resp.
+    std::vector<Math::Complex> even( signal.size() / 2, Math::Complex( 0.0, 0.0 ) );
+    std::vector<Math::Complex> odd( signal.size() / 2, Math::Complex( 0.0, 0.0 ) );
+
+    for( size_t i = 0; i < signal.size() / 2; ++i )
+    {
+        even[i] = signal[i * 2];
+        odd[i]  = signal[i * 2 + 1];
+    }
+
+    // Recurse for both odd/even signals.
+    std::vector<Math::Complex> even_transformed = ifft( std::move(even) );
+    std::vector<Math::Complex> odd_transformed  = ifft( std::move(odd) );
+
+    // Now join the results using the butterfly technique.
+    std::vector<Math::Complex> result( signal.size(), Math::Complex( 0.0, 0.0 ) );
+
+    Math::Complex W   = Math::Complex( 1.0, 0.0 );
+    Math::Complex W_1 = Math::Complex( std::cos( ( 2.0 * PI ) / static_cast<double>( signal.size() ) ),
+                                       std::sin( ( 2.0 * PI ) / static_cast<double>( signal.size() ) ) );
+    
+    const size_t half_signal_size = signal.size() / 2;
+    for( size_t i = 0; i < half_signal_size; ++i )
+    {
+        result[i]                    = even_transformed[i] + ( W * odd_transformed[i] );
+        result[i + half_signal_size] = even_transformed[i] - ( W * odd_transformed[i] );
+        W = W * W_1;
+    }
+
+    // Return result.
+    return std::move( result );
+}
+
 
 //========================================================================
 //
@@ -92,7 +144,14 @@ void EqualizerFFT::eq( const std::vector<double>& in,
     }
 
     // Forward transform.
+    //std::vector<Math::Complex> transformed = _dft.transform( std::move( signal_as_complex ) );
     std::vector<Math::Complex> transformed = std::move( fft( std::move( signal_as_complex ) ) );
+
+    // Normalize the result.
+    for( auto& c : transformed )
+    {
+        c = c * ( 1.0 / static_cast<double>( std::sqrt( transformed.size() ) ) );
+    }
 
     // Process here //
     for( Uint i = 0; i < transformed.size(); ++i )
@@ -110,7 +169,14 @@ void EqualizerFFT::eq( const std::vector<double>& in,
     }
 
     // Transform back.
-    std::vector<Math::Complex> inverse_signal_as_complex = std::move( _dft.inverse_transform( transformed ) );
+    //std::vector<Math::Complex> inverse_signal_as_complex = _dft.inverse_transform( std::move( transformed ) );
+    std::vector<Math::Complex> inverse_signal_as_complex = std::move( ifft( std::move( transformed ) ) );
+
+    // Normalize the result.
+    for( auto& c : inverse_signal_as_complex )
+    {
+        c = c * ( 1.0 / static_cast<double>( std::sqrt( inverse_signal_as_complex.size() ) ) );
+    }
 
     out.clear();
     out.reserve( _chunk_size );
