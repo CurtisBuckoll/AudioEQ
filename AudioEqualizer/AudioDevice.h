@@ -5,12 +5,15 @@
 #include "WavFile.h"
 
 #include "AudioOutputBuffer.h"
-#include "Equalizer.h"
+#include "IEqualizer.h"
+
 
 // =======================================================================
 //
 struct AudioConfig
 {
+    // -----------------------------------------------------------------
+    //
     int _sample_index;
     int _sampling_freq;
     int _bit_depth_stereo;
@@ -21,13 +24,20 @@ struct AudioConfig
 //
 struct AudioBuffer
 {
+    // -----------------------------------------------------------------
+    //
     AudioBuffer( std::vector<std::vector<double>>&& data,
-                 size_t chunk_size )
+                 size_t chunk_size,
+                 IEqualizer& eq,
+                 const std::vector<double>& eq_coeffs)
         : _output_buffer( chunk_size )
         , _input_buffer( std::move( data ) )
-        , _equalizer( chunk_size )
+        , _equalizer( eq )
+        , _eq_coeffs( eq_coeffs )
     {};
 
+    // -----------------------------------------------------------------
+    //
     struct InputBuffer 
     {
         std::vector<std::vector<double>> _buffer;
@@ -53,13 +63,18 @@ struct AudioBuffer
         InputBuffer() = delete;
     };
 
+    // -----------------------------------------------------------------
+    //
     AudioBuffer() = delete;
 
+    // -----------------------------------------------------------------
+    //
     SDL_AudioDeviceID _device_id;
     AudioConfig*      _audio_config;
     InputBuffer       _input_buffer;
     AudioOutputBuffer _output_buffer;
-    Equalizer         _equalizer;
+    IEqualizer&       _equalizer;
+    const std::vector<double>& _eq_coeffs;
 };
 
 // =======================================================================
@@ -87,8 +102,10 @@ public:
 
     // -----------------------------------------------------------------
     // Takes ownership of the buffer supplied.
-    AudioDevice( std::vector<std::vector<double>>&& data, 
-                 size_t chunk_size );
+    AudioDevice( std::vector<std::vector<double>>&& data,
+                 size_t chunk_size,
+                 IEqualizer& eq,
+                 const std::vector<double>& eq_coeffs );
 
     // -----------------------------------------------------------------
     //
@@ -106,8 +123,6 @@ public:
     //
     void terminate();
 
-    // TEMP***************
-    void temp_apply_eq( WavFile& wav_file );
 
 private:
 

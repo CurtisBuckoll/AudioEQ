@@ -170,8 +170,13 @@
     <ClInclude Include="DFT.h" />
     <ClInclude Include="EQDraw.h" />
     <ClInclude Include="Equalizer.h" />
+    <ClInclude Include="EqualizerDCT.h" />
+    <ClInclude Include="EqualizerDFT.h" />
+    <ClInclude Include="EqualizerFFT.h" />
+    <ClInclude Include="IEqualizer.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="IWindow.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -190,7 +195,11 @@
     <ClCompile Include="DFT.cpp" />
     <ClCompile Include="EQDraw.cpp" />
     <ClCompile Include="Equalizer.cpp" />
+    <ClCompile Include="EqualizerDCT.cpp" />
+    <ClCompile Include="EqualizerDFT.cpp" />
+    <ClCompile Include="EqualizerFFT.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="stdafx.cpp">

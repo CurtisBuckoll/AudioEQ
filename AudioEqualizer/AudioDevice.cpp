@@ -4,62 +4,7 @@
 #include <vector>
 #include <iostream>
 
-#include "DCT.h"
-
-// For testing, delete this pls. ****************
-void AudioDevice::temp_apply_eq( WavFile& wav_file )
-{
-    std::vector<std::vector<double>> to_process;
-
-    double* raw_data = wav_file.get_raw_data_pointer();
-    size_t index = 0;
-
-    const Uint DCT_SZ = 128;
-
-    DCT dct( DCT_SZ );
-
-    while( true )
-    {
-        if( index > wav_file.getNumSamples() - DCT_SZ )
-        {
-            break;
-        }
-
-        std::vector<double> next_chunk( DCT_SZ, 0.0 );
-
-        for( size_t i = 0; i < DCT_SZ; ++i )
-        {
-            next_chunk[i] = raw_data[index];
-            ++index;
-        }
-
-        index -= DCT_SZ;
-
-        std::vector<double> transformed = dct.transform( next_chunk );
-
-        const Uint MIDDLE = DCT_SZ / 2;
-
- /*       size_t shift = 20;
-        double s = 4;
-
-        transformed[MIDDLE + 3 - shift] = transformed[MIDDLE + 3 - shift] * 2 * s;
-        transformed[MIDDLE + 2 - shift] = transformed[MIDDLE + 2 - shift] * 3 * s;
-        transformed[MIDDLE + 1 - shift] = transformed[MIDDLE + 1 - shift] * 4 * s;
-        transformed[MIDDLE + 0 - shift] = transformed[MIDDLE + 0 - shift] * 5 * s;
-        transformed[MIDDLE - 1 - shift] = transformed[MIDDLE - 1 - shift] * 4 * s;
-        transformed[MIDDLE - 2 - shift] = transformed[MIDDLE - 2 - shift] * 3 * s;
-        transformed[MIDDLE - 3 - shift] = transformed[MIDDLE - 3 - shift] * 2 * s;*/
-
-
-        transformed = dct.inverse_transform( transformed );
-
-        for( size_t i = 0; i < DCT_SZ; ++i )
-        {
-            raw_data[index] = transformed[i];
-            ++index;
-        }
-    }
-}
+#include "IEqualizer.h"
 
 // Inline the call back function as a lambda.
 auto read_func_callback = []( void* user_data, Uint8* device_buffer, int length ) -> void
@@ -84,9 +29,12 @@ auto read_func_callback = []( void* user_data, Uint8* device_buffer, int length 
 
 // =======================================================================
 //
-AudioDevice::AudioDevice( std::vector<std::vector<double>>&& data, size_t chunk_size )
+AudioDevice::AudioDevice( std::vector<std::vector<double>>&& data, 
+                          size_t chunk_size, 
+                          IEqualizer& eq,
+                          const std::vector<double>& eq_coeffs )
     : _audio_thread( nullptr )
-    , _audio_buffer( std::move( data ), chunk_size )
+    , _audio_buffer( std::move( data ), chunk_size, eq, eq_coeffs )
 {
     // Capture the input data
 
@@ -148,7 +96,7 @@ void processAudioToOutputBuffer( AudioBuffer* audio_buffer )
         if( !input_buffer.outOfData() )
         {      
             std::vector<double> processed;
-            audio_buffer->_equalizer.eq( std::move( input_buffer.getNextChunk() ), processed, true );
+            audio_buffer->_equalizer.eq( std::move( input_buffer.getNextChunk() ), processed, audio_buffer->_eq_coeffs, true );
 
             // ************************************************************************************************
             // SHOULD ADD A SET OR ADD FLAG TO ABOVE ^^^^ !!

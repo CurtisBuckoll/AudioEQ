@@ -1,0 +1,32 @@
+﻿  main.cpp
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\main.cpp(27): warning C4114: same type qualifier used more than once
+AudioDevice.obj : error LNK2019: unresolved external symbol SDL_CreateThread referenced in function "public: void __cdecl AudioDevice::setPlayState(enum DEVICE_STATE)" (?setPlayState@AudioDevice@@QEAAXW4DEVICE_STATE@@@Z)
+AudioDevice.obj : error LNK2019: unresolved external symbol SDL_WaitThread referenced in function "public: void __cdecl AudioDevice::terminate(void)" (?terminate@AudioDevice@@QEAAXXZ)
+AudioDevice.obj : error LNK2019: unresolved external symbol SDL_OpenAudioDevice referenced in function "public: __cdecl AudioDevice::AudioDevice(class std::vector<class std::vector<double,class std::allocator<double> >,class std::allocator<class std::vector<double,class std::allocator<double> > > > &&,unsigned __int64,class IEqualizer &)" (??0AudioDevice@@QEAA@$$QEAV?$vector@V?$vector@NV?$allocator@N@std@@@std@@V?$allocator@V?$vector@NV?$allocator@N@std@@@std@@@2@@std@@_KAEAVIEqualizer@@@Z)
+AudioEqualizer.obj : error LNK2001: unresolved external symbol SDL_OpenAudioDevice
+AudioDevice.obj : error LNK2019: unresolved external symbol SDL_PauseAudioDevice referenced in function "public: void __cdecl AudioDevice::setPlayState(enum DEVICE_STATE)" (?setPlayState@AudioDevice@@QEAAXW4DEVICE_STATE@@@Z)
+AudioEqualizer.obj : error LNK2001: unresolved external symbol SDL_PauseAudioDevice
+AudioDevice.obj : error LNK2019: unresolved external symbol SDL_LockAudioDevice referenced in function "public: void __cdecl AudioDevice::getFrequencySpectrum(class std::vector<double,class std::allocator<double> > &)" (?getFrequencySpectrum@AudioDevice@@QEAAXAEAV?$vector@NV?$allocator@N@std@@@std@@@Z)
+AudioEqualizer.obj : error LNK2001: unresolved external symbol SDL_LockAudioDevice
+AudioDevice.obj : error LNK2019: unresolved external symbol SDL_UnlockAudioDevice referenced in function "public: void __cdecl AudioDevice::getFrequencySpectrum(class std::vector<double,class std::allocator<double> > &)" (?getFrequencySpectrum@AudioDevice@@QEAAXAEAV?$vector@NV?$allocator@N@std@@@std@@@Z)
+AudioEqualizer.obj : error LNK2001: unresolved external symbol SDL_UnlockAudioDevice
+AudioDevice.obj : error LNK2019: unresolved external symbol SDL_CloseAudioDevice referenced in function "public: void __cdecl AudioDevice::terminate(void)" (?terminate@AudioDevice@@QEAAXXZ)
+AudioEqualizer.obj : error LNK2019: unresolved external symbol SDL_memcpy referenced in function "void __cdecl PlatformFillAudioDeviceBuffer(void *,unsigned char *,int)" (?PlatformFillAudioDeviceBuffer@@YAXPEAXPEAEH@Z)
+AudioEqualizer.obj : error LNK2019: unresolved external symbol SDL_GetError referenced in function "void __cdecl PlatformInitializeAudio(struct platform_audio_buffer *)" (?PlatformInitializeAudio@@YAXPEAUplatform_audio_buffer@@@Z)
+AudioEqualizer.obj : error LNK2019: unresolved external symbol SDL_Log referenced in function "void __cdecl PlatformInitializeAudio(struct platform_audio_buffer *)" (?PlatformInitializeAudio@@YAXPEAUplatform_audio_buffer@@@Z)
+InputManager.obj : error LNK2019: unresolved external symbol SDL_PollEvent referenced in function "public: bool __cdecl InputManager::pollForEvents(void)" (?pollForEvents@InputManager@@QEAA_NXZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_CreateWindow referenced in function "public: virtual void __cdecl Window::init(void)" (?init@Window@@UEAAXXZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_DestroyWindow referenced in function "public: virtual __cdecl Window::~Window(void)" (??1Window@@UEAA@XZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_CreateRenderer referenced in function "public: virtual void __cdecl Window::init(void)" (?init@Window@@UEAAXXZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_CreateTexture referenced in function "public: virtual void __cdecl Window::init(void)" (?init@Window@@UEAAXXZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_UpdateTexture referenced in function "public: virtual void __cdecl Window::RenderFrame(void)" (?RenderFrame@Window@@UEAAXXZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_SetRenderDrawColor referenced in function "public: virtual void __cdecl Window::RenderFrame(void)" (?RenderFrame@Window@@UEAAXXZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_RenderClear referenced in function "public: virtual void __cdecl Window::RenderFrame(void)" (?RenderFrame@Window@@UEAAXXZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_RenderCopy referenced in function "public: virtual void __cdecl Window::RenderFrame(void)" (?RenderFrame@Window@@UEAAXXZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_RenderPresent referenced in function "public: virtual void __cdecl Window::RenderFrame(void)" (?RenderFrame@Window@@UEAAXXZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_DestroyRenderer referenced in function "public: virtual __cdecl Window::~Window(void)" (??1Window@@UEAA@XZ)
+Window.obj : error LNK2019: unresolved external symbol SDL_Init referenced in function "public: virtual void __cdecl Window::init(void)" (?init@Window@@UEAAXXZ)
+MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
+C:\Users\Curtis\Documents\PortfolioProjects\AudioEqualizer\deps\lib\SDL2.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Users\Curtis\Documents\PortfolioProjects\AudioEqualizer\deps\lib\SDL2main.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Users\Curtis\Documents\PortfolioProjects\AudioEqualizer\x64\Debug\AudioEqualizer.exe : fatal error LNK1120: 23 unresolved externals
