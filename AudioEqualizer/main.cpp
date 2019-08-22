@@ -19,14 +19,14 @@
 
 static const int kWIN_WIDTH = 600;
 static const int kWIN_HEIGHT = 400;
-static const int kNUM_EQ_SAMPLES = 128;
+static const int kNUM_EQ_SAMPLES = 256;
 
 std::vector<std::string> wav_files = { "../resources/sine_sweep.wav",
                                        "../resources/white_noise.wav",
                                        "../resources/sample_piano.wav",
                                        "../resources/Q2_sample_2.wav" };
 
-const char const* FILE_PATH = wav_files[0].c_str();
+const char const* FILE_PATH = wav_files[1].c_str();
 
 void test();
 
@@ -66,7 +66,7 @@ int main( int argc, char** argv )
     EqualizerDCT dct( kNUM_EQ_SAMPLES );
     EqualizerFFT fft( kNUM_EQ_SAMPLES );
 
-    AudioDevice audio_device( std::move(wav_file._vectorized_audio), kNUM_EQ_SAMPLES, fft, eq_curve.getEqCoeffsBuffer() );
+    AudioDevice audio_device( std::move(wav_file._vectorized_audio), kNUM_EQ_SAMPLES, dft, eq_curve.getEqCoeffsBuffer() );
     audio_device.setPlayState( DEVICE_STATE::PLAY );
 
     size_t chunk_index = 0;

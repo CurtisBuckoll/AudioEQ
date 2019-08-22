@@ -1,4 +1,5 @@
-﻿  EqualizerFFT.cpp
+﻿  main.cpp
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\main.cpp(29): warning C4114: same type qualifier used more than once
   Generating code
   1 of 733 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation

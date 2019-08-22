@@ -30,6 +30,12 @@ void EqualizerDCT::eq( const std::vector<double>& in,
     out = _dct.transform( in );
 
     // Process here
+    for( Uint i = 0; i < out.size(); ++i )
+    {
+        out[i] = out[i] * ( std::pow( 10, eq_coeffs[i] / 100.0 ) );
+    }
+
+    // Accumulate spectrum coefficients
     if( save_coefficients )
     {
         for( size_t i = 0; i < out.size(); ++i )

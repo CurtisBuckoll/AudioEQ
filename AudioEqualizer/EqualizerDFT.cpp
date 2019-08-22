@@ -41,7 +41,7 @@ void EqualizerDFT::eq( const std::vector<double>& in,
     // Forward transform.
     std::vector<Math::Complex> transformed = std::move( _dft.transform( signal_as_complex ) );
 
-    // Process here //
+    // Process here
     for( Uint i = 0; i < transformed.size(); ++i )
     {
         transformed[i] = transformed[i] * (1.0 / 20.0 * std::pow( 10, eq_coeffs[i] / 100.0 ));

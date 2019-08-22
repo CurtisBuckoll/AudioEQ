@@ -3,7 +3,13 @@
 #include <SDL/SDL.h>
 #include <vector>
 
-static const size_t kAUDIO_BUFFER_SIZE = 128;
+
+// -----------------------------------------------------------------
+// This will affect the responsiveness of moving adjusting the EQ 
+// curve. It was originally set to 128 which was a wide buffer. 
+// lowering may not provide enough buffer space and the audio will 
+// cut out.
+static const size_t kAUDIO_BUFFER_SIZE = 32; // 128
 
 // =======================================================================
 // 
@@ -71,7 +77,6 @@ public:
                     _front_chunk_sample_index = 0;
                     ++_front_chunk_index;
                 }
-
             }
 
             _front_chunk_index = _front_chunk_index % _samples.size();
