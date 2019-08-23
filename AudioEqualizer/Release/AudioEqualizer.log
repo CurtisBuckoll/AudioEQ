@@ -1,7 +1,16 @@
-﻿  main.cpp
-c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\main.cpp(29): warning C4114: same type qualifier used more than once
+﻿  EQDraw.cpp
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(232): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(242): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(242): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(250): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(250): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(259): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(259): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(267): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(267): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(292): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   Generating code
-  1 of 733 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+  2 of 738 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

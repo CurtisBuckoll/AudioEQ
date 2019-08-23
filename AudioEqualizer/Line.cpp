@@ -313,14 +313,14 @@ void Line::antialiased( vec2 p0, vec2 p1, Color256 color, IWindow& window )
     voidDrawFnAA lineFunction = getDrawFunctionAA( v, octant );
     voidGetPixelFnAA pixelFunction = getPixelFunction( octant );
 
-    double dx = v.x_;
-    double dy = v.y_;
-    double slope = dx != 0.0 ? dy / dx : 0.0;
+    const double dx = v.x_;
+    const double dy = v.y_;
+    const double slope = dx != 0.0 ? dy / dx : 0.0;
     double coverage;
     Color256 oldColor;
     Color256 newColor;
 
-    double x_range = std::round( v.x_ );
+    const double x_range = std::round( v.x_ );
 
     double y = 0.0;
 
@@ -331,7 +331,7 @@ void Line::antialiased( vec2 p0, vec2 p1, Color256 color, IWindow& window )
             int currY = static_cast<int>( std::round( p0.y_ + y ) ) + i;
             double h = static_cast<double>( currY ) - ( p0.y_ + y );
             double D = std::abs( ( dx * h ) / sqrt( dx * dx + dy * dy ) );
-            D = D - ( LINEWIDTH / 2 );
+            D = D - ( LINEWIDTH / 2.0 );
 
             double coverage = 0.0;
 
