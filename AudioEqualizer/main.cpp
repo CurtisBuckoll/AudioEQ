@@ -6,6 +6,7 @@
 #include "AudioDevice.h"
 #include "Window.h"
 #include "InputManager.h"
+#include "FrameRateLimiter.h"
 #include "EQDraw.h"
 #include "Equalizer.h"
 
@@ -13,6 +14,14 @@
 #include "EqualizerDFT.h"
 #include "EqualizerDCT.h"
 #include "EqualizerFFT.h"
+
+// Parameters: 
+// eq type (dct, dft, fft)
+// num eq samples
+// frame rate
+// whether to print fps or not
+// the file to play
+// enter test mode
 
 // -----------------------------------------------------------------
 //
@@ -61,12 +70,13 @@ int main( int argc, char** argv )
     Equalizer equalizer( kNUM_EQ_SAMPLES );
 
     InputManager input_manager;
+    FrameRateLimiter frame_rate_limiter( 60, 1.0, 60 );
 
     EqualizerDFT dft( kNUM_EQ_SAMPLES );
     EqualizerDCT dct( kNUM_EQ_SAMPLES );
     EqualizerFFT fft( kNUM_EQ_SAMPLES );
 
-    AudioDevice audio_device( std::move(wav_file._vectorized_audio), kNUM_EQ_SAMPLES, dft, eq_curve.getEqCoeffsBuffer() );
+    AudioDevice audio_device( std::move(wav_file._vectorized_audio), kNUM_EQ_SAMPLES, fft, eq_curve.getEqCoeffsBuffer() );
     audio_device.setPlayState( DEVICE_STATE::PLAY );
 
     size_t chunk_index = 0;
@@ -90,6 +100,8 @@ int main( int argc, char** argv )
 
         //if( !running ) break;
 
+        frame_rate_limiter.setStartFrame();
+
         eq_curve.processUserInput( input_manager.getKeys() );
 
         std::vector<double> audio_spectrum;
@@ -97,6 +109,9 @@ int main( int argc, char** argv )
 
         eq_curve.drawSpectrumTowindow( audio_spectrum );
         eq_curve.drawToWindow();
+
+        frame_rate_limiter.LimitFPS();
+        frame_rate_limiter.printFPS();
 
         //equalizer.eq_chunks( eq_samples_in, eq_samples_out );
 

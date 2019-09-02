@@ -13,8 +13,8 @@
 #include <iostream>
 
 //static const double kEQ_MOVE_PEAK_SPEED = 0.3;
-static const double kGAIN_SCALE_SPEED = 0.5;
-static const double kQ_SCALE_SPEED = 0.5;
+static const double kGAIN_SCALE_SPEED = 4.0;
+static const double kQ_SCALE_SPEED = 1.3;
 static const double kMIN_Q = 1.5;
 static const double kMAX_Q = 30.0;
 
@@ -36,7 +36,7 @@ EQDraw::EQDraw( IWindow& window, const size_t num_samples )
     , eq_gain_scale_( 0.0 )
     , q_scale( ( kMIN_Q + kMAX_Q ) / 2.0 )
     , update_curve_( false )
-    , EQ_MOVE_PEAK_SPEED( 0.05 * std::log2( num_samples ) )
+    , EQ_MOVE_PEAK_SPEED( 0.4 * std::log2( num_samples ) )
 {
     //eq_center_ = static_cast<double>( window.getWidth() / 2 );
     eq_center_ = static_cast<double>( eq_sample_sz_ / 2 );

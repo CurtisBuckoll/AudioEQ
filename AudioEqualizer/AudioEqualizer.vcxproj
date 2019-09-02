@@ -173,6 +173,7 @@
     <ClInclude Include="EqualizerDCT.h" />
     <ClInclude Include="EqualizerDFT.h" />
     <ClInclude Include="EqualizerFFT.h" />
+    <ClInclude Include="FrameRateLimiter.h" />
     <ClInclude Include="IEqualizer.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="IWindow.h" />
@@ -198,6 +199,7 @@
     <ClCompile Include="EqualizerDCT.cpp" />
     <ClCompile Include="EqualizerDFT.cpp" />
     <ClCompile Include="EqualizerFFT.cpp" />
+    <ClCompile Include="FrameRateLimiter.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="main.cpp" />
