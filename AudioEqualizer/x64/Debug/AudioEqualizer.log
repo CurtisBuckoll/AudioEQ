@@ -1,8 +1,56 @@
-﻿  main.cpp
-c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\main.cpp(27): warning C4114: same type qualifier used more than once
+﻿  AudioDevice.cpp
+  AudioEqualizer.cpp
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\audioequalizer.cpp(15): warning C4305: 'initializing': truncation from 'double' to 'Real32'
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\audioequalizer.cpp(75): warning C4244: 'return': conversion from 'float' to 'Sint16', possible loss of data
+  AudioOutputBuffer.cpp
+  DCT.cpp
+  EQDraw.cpp
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(236): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(246): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(246): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(254): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(254): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(263): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(263): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(271): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(271): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\eqdraw.cpp(296): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  EQManager.cpp
+  EqualizerDCT.cpp
+  EqualizerDFT.cpp
+  EqualizerFFT.cpp
+  FrameRateLimiter.cpp
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\frameratelimiter.cpp(16): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  InputManager.cpp
+  Line.cpp
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(33): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(53): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(54): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(55): warning C4244: '=': conversion from 'double' to 'unsigned char', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(65): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(69): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(73): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(77): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(81): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(85): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(89): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(93): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(106): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(110): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(114): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(118): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(122): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(126): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(130): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(134): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\line.cpp(319): warning C4101: 'coverage': unreferenced local variable
+  main.cpp
+c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\main.cpp(38): warning C4114: same type qualifier used more than once
+  Matrix.cpp
+  Generating Code...
 AudioDevice.obj : error LNK2019: unresolved external symbol SDL_CreateThread referenced in function "public: void __cdecl AudioDevice::setPlayState(enum DEVICE_STATE)" (?setPlayState@AudioDevice@@QEAAXW4DEVICE_STATE@@@Z)
 AudioDevice.obj : error LNK2019: unresolved external symbol SDL_WaitThread referenced in function "public: void __cdecl AudioDevice::terminate(void)" (?terminate@AudioDevice@@QEAAXXZ)
-AudioDevice.obj : error LNK2019: unresolved external symbol SDL_OpenAudioDevice referenced in function "public: __cdecl AudioDevice::AudioDevice(class std::vector<class std::vector<double,class std::allocator<double> >,class std::allocator<class std::vector<double,class std::allocator<double> > > > &&,unsigned __int64,class IEqualizer &)" (??0AudioDevice@@QEAA@$$QEAV?$vector@V?$vector@NV?$allocator@N@std@@@std@@V?$allocator@V?$vector@NV?$allocator@N@std@@@std@@@2@@std@@_KAEAVIEqualizer@@@Z)
+AudioDevice.obj : error LNK2019: unresolved external symbol SDL_OpenAudioDevice referenced in function "public: __cdecl AudioDevice::AudioDevice(class std::vector<class std::vector<double,class std::allocator<double> >,class std::allocator<class std::vector<double,class std::allocator<double> > > > &&,unsigned __int64,class IEqualizer &,class std::vector<double,class std::allocator<double> > const &)" (??0AudioDevice@@QEAA@$$QEAV?$vector@V?$vector@NV?$allocator@N@std@@@std@@V?$allocator@V?$vector@NV?$allocator@N@std@@@std@@@2@@std@@_KAEAVIEqualizer@@AEBV?$vector@NV?$allocator@N@std@@@2@@Z)
 AudioEqualizer.obj : error LNK2001: unresolved external symbol SDL_OpenAudioDevice
 AudioDevice.obj : error LNK2019: unresolved external symbol SDL_PauseAudioDevice referenced in function "public: void __cdecl AudioDevice::setPlayState(enum DEVICE_STATE)" (?setPlayState@AudioDevice@@QEAAXW4DEVICE_STATE@@@Z)
 AudioEqualizer.obj : error LNK2001: unresolved external symbol SDL_PauseAudioDevice
@@ -14,6 +62,8 @@ AudioDevice.obj : error LNK2019: unresolved external symbol SDL_CloseAudioDevice
 AudioEqualizer.obj : error LNK2019: unresolved external symbol SDL_memcpy referenced in function "void __cdecl PlatformFillAudioDeviceBuffer(void *,unsigned char *,int)" (?PlatformFillAudioDeviceBuffer@@YAXPEAXPEAEH@Z)
 AudioEqualizer.obj : error LNK2019: unresolved external symbol SDL_GetError referenced in function "void __cdecl PlatformInitializeAudio(struct platform_audio_buffer *)" (?PlatformInitializeAudio@@YAXPEAUplatform_audio_buffer@@@Z)
 AudioEqualizer.obj : error LNK2019: unresolved external symbol SDL_Log referenced in function "void __cdecl PlatformInitializeAudio(struct platform_audio_buffer *)" (?PlatformInitializeAudio@@YAXPEAUplatform_audio_buffer@@@Z)
+FrameRateLimiter.obj : error LNK2019: unresolved external symbol SDL_GetTicks referenced in function "public: double __cdecl FrameRateLimiter::LimitFPS(void)" (?LimitFPS@FrameRateLimiter@@QEAANXZ)
+FrameRateLimiter.obj : error LNK2019: unresolved external symbol SDL_Delay referenced in function "public: double __cdecl FrameRateLimiter::LimitFPS(void)" (?LimitFPS@FrameRateLimiter@@QEAANXZ)
 InputManager.obj : error LNK2019: unresolved external symbol SDL_PollEvent referenced in function "public: bool __cdecl InputManager::pollForEvents(void)" (?pollForEvents@InputManager@@QEAA_NXZ)
 Window.obj : error LNK2019: unresolved external symbol SDL_CreateWindow referenced in function "public: virtual void __cdecl Window::init(void)" (?init@Window@@UEAAXXZ)
 Window.obj : error LNK2019: unresolved external symbol SDL_DestroyWindow referenced in function "public: virtual __cdecl Window::~Window(void)" (??1Window@@UEAA@XZ)
@@ -29,4 +79,4 @@ Window.obj : error LNK2019: unresolved external symbol SDL_Init referenced in fu
 MSVCRTD.lib(exe_main.obj) : error LNK2019: unresolved external symbol main referenced in function "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ)
 C:\Users\Curtis\Documents\PortfolioProjects\AudioEqualizer\deps\lib\SDL2.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
 C:\Users\Curtis\Documents\PortfolioProjects\AudioEqualizer\deps\lib\SDL2main.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
-C:\Users\Curtis\Documents\PortfolioProjects\AudioEqualizer\x64\Debug\AudioEqualizer.exe : fatal error LNK1120: 23 unresolved externals
+C:\Users\Curtis\Documents\PortfolioProjects\AudioEqualizer\x64\Debug\AudioEqualizer.exe : fatal error LNK1120: 25 unresolved externals

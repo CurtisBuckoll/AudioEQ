@@ -169,6 +169,7 @@
     <ClInclude Include="DCT.h" />
     <ClInclude Include="DFT.h" />
     <ClInclude Include="EQDraw.h" />
+    <ClInclude Include="EQManager.h" />
     <ClInclude Include="Equalizer.h" />
     <ClInclude Include="EqualizerDCT.h" />
     <ClInclude Include="EqualizerDFT.h" />
@@ -195,6 +196,7 @@
     <ClCompile Include="DCT.cpp" />
     <ClCompile Include="DFT.cpp" />
     <ClCompile Include="EQDraw.cpp" />
+    <ClCompile Include="EQManager.cpp" />
     <ClCompile Include="Equalizer.cpp" />
     <ClCompile Include="EqualizerDCT.cpp" />
     <ClCompile Include="EqualizerDFT.cpp" />

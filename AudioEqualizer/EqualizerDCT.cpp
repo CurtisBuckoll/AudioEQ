@@ -3,6 +3,8 @@
 
 #include <cmath>
 
+static const double kMAGNITUDE_THRESH = 0.01;
+
 //========================================================================
 //
 EqualizerDCT::EqualizerDCT( size_t chunk_size )
@@ -32,7 +34,7 @@ void EqualizerDCT::eq( const std::vector<double>& in,
     // Process here
     for( Uint i = 0; i < out.size(); ++i )
     {
-        out[i] = out[i] * ( std::pow( 10, eq_coeffs[i] / 100.0 ) );
+        out[i] = out[i] * ( 1.0 / 20.0 * std::pow( 10, eq_coeffs[i] / 100.0 ) );
     }
 
     // Accumulate spectrum coefficients
@@ -51,7 +53,23 @@ void EqualizerDCT::eq( const std::vector<double>& in,
 //
 void EqualizerDCT::getCurrentSpectrum( std::vector<double>& coeffs )
 {
-    coeffs = _current_coeffs;
+    coeffs.clear();
+    coeffs.reserve( _chunk_size );
+
+    for( size_t i = 0; i < _chunk_size; ++i )
+    {
+        double magnitude = _current_coeffs[i];
+        if( magnitude > kMAGNITUDE_THRESH )
+        {
+            coeffs.push_back( std::log2( magnitude ) * 800 );
+        }
+        else
+        {
+            coeffs.push_back( 0.0 );
+        }
+    }
+
+    //coeffs = _current_coeffs;
 }
 
 //========================================================================
@@ -70,7 +88,6 @@ void EqualizerDCT::normalizeSpectrum( size_t total_iterations )
 
     for( double& entry : _current_coeffs )
     {
-        //entry /= static_cast<double>( total_iterations );
         entry = entry * scale_factor;
     }
 }

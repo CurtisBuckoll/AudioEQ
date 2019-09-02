@@ -331,7 +331,7 @@ void Line::antialiased( vec2 p0, vec2 p1, Color256 color, IWindow& window )
             int currY = static_cast<int>( std::round( p0.y_ + y ) ) + i;
             double h = static_cast<double>( currY ) - ( p0.y_ + y );
             double D = std::abs( ( dx * h ) / sqrt( dx * dx + dy * dy ) );
-            D = D - ( LINEWIDTH / 2.0 );
+            D = D - ( LINEWIDTH / 2 );
 
             double coverage = 0.0;
 

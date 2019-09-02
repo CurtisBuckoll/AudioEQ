@@ -2,10 +2,11 @@
 
 #include <SDL/SDL.h>
 #include <cstring>
-#include "WavFile.h"
+#include <array>
 
+#include "WavFile.h"
 #include "AudioOutputBuffer.h"
-#include "IEqualizer.h"
+#include "EQManager.h"
 
 
 // =======================================================================
@@ -32,7 +33,7 @@ struct AudioBuffer
                  const std::vector<double>& eq_coeffs)
         : _output_buffer( chunk_size )
         , _input_buffer( std::move( data ) )
-        , _equalizer( eq )
+        , _eq_manager( chunk_size )
         , _eq_coeffs( eq_coeffs )
     {};
 
@@ -73,7 +74,7 @@ struct AudioBuffer
     AudioConfig*      _audio_config;
     InputBuffer       _input_buffer;
     AudioOutputBuffer _output_buffer;
-    IEqualizer&       _equalizer;
+    EQManager         _eq_manager;
     const std::vector<double>& _eq_coeffs;
 };
 
@@ -121,16 +122,19 @@ public:
 
     // -----------------------------------------------------------------
     //
+    void switchAnyalyzer( bool* keys );
+
+    // -----------------------------------------------------------------
+    //
     void terminate();
 
 
 private:
 
-    AudioConfig   _audio_config;
-    AudioBuffer   _audio_buffer;
-    ThreadContext _thread_context;
-    SDL_Thread*   _audio_thread;
-
-    //InputBuffer _input_buffer;
+    AudioConfig                _audio_config;
+    AudioBuffer                _audio_buffer;
+    ThreadContext              _thread_context;
+    SDL_Thread*                _audio_thread;
+    bool                       _should_switch;
 };
 

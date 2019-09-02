@@ -35,6 +35,7 @@ AudioDevice::AudioDevice( std::vector<std::vector<double>>&& data,
                           const std::vector<double>& eq_coeffs )
     : _audio_thread( nullptr )
     , _audio_buffer( std::move( data ), chunk_size, eq, eq_coeffs )
+    , _should_switch( false )
 {
     // Capture the input data
 
@@ -91,12 +92,14 @@ void processAudioToOutputBuffer( AudioBuffer* audio_buffer )
     AudioOutputBuffer& output_buffer       = audio_buffer->_output_buffer;
     size_t num_iterations                  = 1;
 
+    IEqualizer& equalizer = audio_buffer->_eq_manager.getCurrent();
+
     while( output_buffer.isEmpty() )
     {
         if( !input_buffer.outOfData() )
         {      
             std::vector<double> processed;
-            audio_buffer->_equalizer.eq( std::move( input_buffer.getNextChunk() ), processed, audio_buffer->_eq_coeffs, true );
+            equalizer.eq( std::move( input_buffer.getNextChunk() ), processed, audio_buffer->_eq_coeffs, true );
 
             // ************************************************************************************************
             // SHOULD ADD A SET OR ADD FLAG TO ABOVE ^^^^ !!
@@ -111,7 +114,7 @@ void processAudioToOutputBuffer( AudioBuffer* audio_buffer )
         ++num_iterations;
     }
 
-    audio_buffer->_equalizer.normalizeSpectrum( num_iterations );
+    equalizer.normalizeSpectrum( num_iterations );
 
     //size_t bytes_written = 0;
 
@@ -149,15 +152,6 @@ void processAudioToOutputBuffer( AudioBuffer* audio_buffer )
 
 // =======================================================================
 //
-Sint16 sampleSineWave( AudioConfig* audio_config )
-{
-    static int sample_index = 0;
-    double half_wave_counter = 90;
-    return 3000 * sin( 2 * 3.14159265359 * sample_index++ / half_wave_counter );
-}
-
-// =======================================================================
-//
 int getUserAudioDataThread( void* user_data )
 {
     ThreadContext* audio_thread = static_cast<ThreadContext*>( user_data );
@@ -186,14 +180,38 @@ void AudioDevice::setPlayState( DEVICE_STATE state )
     _audio_thread = SDL_CreateThread( getUserAudioDataThread, "Audio", (void*)&_thread_context );
 }
 
-// -----------------------------------------------------------------
+// =======================================================================
 //
 void AudioDevice::getFrequencySpectrum( std::vector<double>& freq_coeffs )
 {
     SDL_LockAudioDevice( _audio_buffer._device_id );
-    _audio_buffer._equalizer.getCurrentSpectrum( freq_coeffs );
+    _audio_buffer._eq_manager.getCurrent().getCurrentSpectrum( freq_coeffs );
     SDL_UnlockAudioDevice( _audio_buffer._device_id );
 }
+
+// =======================================================================
+//
+
+void AudioDevice::switchAnyalyzer( bool* keys )
+{
+    if( keys[SDLK_SPACE] )
+    {
+        if( _should_switch )
+        {
+            SDL_LockAudioDevice( _audio_buffer._device_id );
+            _audio_buffer._eq_manager.update();
+            SDL_UnlockAudioDevice( _audio_buffer._device_id );
+            _should_switch = false;
+        }
+    }
+    else
+    {
+        // Then we know the key has been released, so we can
+        // know next switch is intentional.
+        _should_switch = true;
+    }
+}
+
 
 // =======================================================================
 //

@@ -1,5 +1,2 @@
-﻿  EqualizerFFT.cpp
-  main.cpp
-c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\main.cpp(29): warning C4114: same type qualifier used more than once
-  Generating Code...
+﻿  EQManager.cpp
   AudioEqualizer.vcxproj -> C:\Users\Curtis\Documents\PortfolioProjects\AudioEqualizer\Debug\AudioEqualizer.exe
