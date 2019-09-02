@@ -68,8 +68,6 @@ void EqualizerDCT::getCurrentSpectrum( std::vector<double>& coeffs )
             coeffs.push_back( 0.0 );
         }
     }
-
-    //coeffs = _current_coeffs;
 }
 
 //========================================================================

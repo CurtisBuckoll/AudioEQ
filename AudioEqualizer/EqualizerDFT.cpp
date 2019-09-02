@@ -3,6 +3,8 @@
 
 #include <cmath>
 
+
+//--------------------------------------------------------------
 // We need this so we don't take log of a number too close to 0.
 static const double kMAGNITUDE_THRESH = 0.01;
 
@@ -70,27 +72,6 @@ void EqualizerDFT::eq( const std::vector<double>& in,
 
     return;
 }
-
-//========================================================================
-//
-//void EqualizerDFT::eqChunks( const std::vector<std::vector<double>>& chunks_in,
-//                             std::vector<std::vector<double>>& chunks_out,
-//                             bool save_coefficients )
-//{
-//    for( auto chunk : chunks_in )
-//    {
-//        std::vector<double> transformed = std::move( _dct.transform( chunk ) );
-//
-//        // Process here
-//        if( save_coefficients )
-//        {
-//            _current_coeffs = transformed;
-//        }
-//
-//
-//        chunks_out.push_back( std::move( _dct.inverse_transform( transformed ) ) );
-//    }
-//}
 
 //========================================================================
 //
