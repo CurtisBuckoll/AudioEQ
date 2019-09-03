@@ -1,8 +1,12 @@
-﻿  main.cpp
+﻿  AudioDevice.cpp
+  EQManager.cpp
+  EqualizerDCT.cpp
+  EqualizerDFT.cpp
+  main.cpp
 c:\users\curtis\documents\portfolioprojects\audioequalizer\audioequalizer\main.cpp(38): warning C4114: same type qualifier used more than once
   Generating code
-  14 of 763 functions ( 1.8%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  303 of 997 functions (30.4%) were compiled, the rest were copied from previous compilation.
+    236 functions were new in current compilation
+    52 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   AudioEqualizer.vcxproj -> C:\Users\Curtis\Documents\PortfolioProjects\AudioEqualizer\Release\AudioEqualizer.exe

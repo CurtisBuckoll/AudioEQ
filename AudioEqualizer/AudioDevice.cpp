@@ -202,7 +202,6 @@ void AudioDevice::switchAnyalyzer( bool* keys )
             _audio_buffer._eq_manager.update();
             SDL_UnlockAudioDevice( _audio_buffer._device_id );
             _should_switch = false;
-            std::cout << "Switched EQ mode" << std::endl;
         }
     }
     else
