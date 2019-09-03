@@ -190,7 +190,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AudioDevice.cpp" />
-    <ClCompile Include="AudioEqualizer.cpp" />
     <ClCompile Include="AudioOutputBuffer.cpp" />
     <ClCompile Include="Complex.cpp" />
     <ClCompile Include="DCT.cpp" />

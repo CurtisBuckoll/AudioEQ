@@ -33,13 +33,6 @@ std::vector<Math::Complex> EqualizerFFT::fft( std::vector<Math::Complex> signal 
     {
         return std::move( signal );
     }
-    //if( signal.size() <= 2 )
-    //{
-    //    std::vector<Math::Complex> base_result( 2, Math::Complex(0.0, 0.0) );
-    //    base_result[0] = signal[0] + signal[1];
-    //    base_result[1] = signal[0] - signal[1];
-    //    return base_result;
-    //}
 
     // General case:
     // Form two vectors containing even/odd indices resp.
@@ -85,13 +78,6 @@ std::vector<Math::Complex> EqualizerFFT::ifft( std::vector<Math::Complex> signal
     {
         return std::move( signal );
     }
-    //if( signal.size() <= 2 )
-    //{
-    //    std::vector<Math::Complex> base_result( 2, Math::Complex(0.0, 0.0) );
-    //    base_result[0] = signal[0] + signal[1];
-    //    base_result[1] = signal[0] - signal[1];
-    //    return base_result;
-    //}
 
     // General case:
     // Form two vectors containing even/odd indices resp.
@@ -144,7 +130,6 @@ void EqualizerFFT::eq( const std::vector<double>& in,
     }
 
     // Forward transform.
-    //std::vector<Math::Complex> transformed = _dft.transform( std::move( signal_as_complex ) );
     std::vector<Math::Complex> transformed = std::move( fft( std::move( signal_as_complex ) ) );
 
     // Normalize the result.
@@ -169,7 +154,6 @@ void EqualizerFFT::eq( const std::vector<double>& in,
     }
 
     // Transform back.
-    //std::vector<Math::Complex> inverse_signal_as_complex = _dft.inverse_transform( std::move( transformed ) );
     std::vector<Math::Complex> inverse_signal_as_complex = std::move( ifft( std::move( transformed ) ) );
 
     // Normalize the result.
@@ -189,27 +173,6 @@ void EqualizerFFT::eq( const std::vector<double>& in,
 
     return;
 }
-
-//========================================================================
-//
-//void EqualizerDFT::eqChunks( const std::vector<std::vector<double>>& chunks_in,
-//                             std::vector<std::vector<double>>& chunks_out,
-//                             bool save_coefficients )
-//{
-//    for( auto chunk : chunks_in )
-//    {
-//        std::vector<double> transformed = std::move( _dct.transform( chunk ) );
-//
-//        // Process here
-//        if( save_coefficients )
-//        {
-//            _current_coeffs = transformed;
-//        }
-//
-//
-//        chunks_out.push_back( std::move( _dct.inverse_transform( transformed ) ) );
-//    }
-//}
 
 //========================================================================
 //

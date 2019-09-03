@@ -9,19 +9,6 @@
 namespace Math
 {
 
-//#include <random>
-
-////========================================================================
-////
-//int getRandomEntry(int min, int max)
-//{
-//    std::random_device device;
-//    std::mt19937 rng(device());
-//    std::uniform_int_distribution<int> distribution(min, max);
-//
-//    return distribution(rng);
-//}
-
 //========================================================================
 //
 template<typename T>
@@ -30,21 +17,6 @@ Matrix<T>::Matrix( size_t size )
 {
     matrix_.resize( sz_, std::vector<T>( sz_, T() ) );
 }
-
-//========================================================================
-//
-//template<typename T>
-//void Matrix<T>::print()
-//{
-//    for( Uint i = 0; i < this->sz_; i++ )
-//    {
-//        for( Uint j = 0; j < this->sz_; j++ )
-//        {
-//            std::cout << std::setprecision( 4 ) << matrix_[i][j] << "\t";
-//        }
-//        std::cout << std::endl;
-//    }
-//}
 
 //========================================================================
 //
@@ -61,28 +33,14 @@ void Matrix<T>::transpose()
         }
     }
 
-    // OPT should be able to std::move the whole thing..
-    //matrix_ = std::move( t_mat.matrix_ );
+    // TODO: I think we should be able to std::move the whole thing..
+    // ie. matrix_ = std::move( t_mat.matrix_ );
 
     for( Uint i = 0; i < this->sz_; ++i )
     {
         matrix_[i] = t_mat.matrix_[i];
     }
 }
-
-//========================================================================
-//
-//template<typename T>
-//void Matrix<T>::makeRandom( int low, int hi )
-//{
-//    for( Uint i = 0; i < this->sz_; i++ )
-//    {
-//        for( Uint j = 0; j < this->sz_; j++ )
-//    	{
-//            matrix_[i][j] = getRandomEntry( low, hi );
-//    	}
-//    }
-//}
 
 //========================================================================
 //

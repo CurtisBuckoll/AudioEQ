@@ -56,32 +56,6 @@ DFT::DFT( size_t mat_size )
     fillMatrix( omega, T );
     omega = Math::Complex( std::cos( 2.0 * PI / static_cast<double>( sz_ ) ), std::sin( 2.0 * PI / static_cast<double>( sz_ ) ) );
     fillMatrix( omega, T_inv );
-
-    // Construct the size N = sz_ DFT Matrices (forward and inverse).
-    //for( Uint i = 0; i < N; ++i )
-    //{
-    //    Math::Complex row_exp( 0.0, 0.0 );
-
-    //    for( Uint j = 0; j < N; ++j )
-    //    {
-    //        Math::Complex entry( 1.0, 0.0 );
-
-    //        if( i > 0 && j > 0)
-    //        {
-    //            if( j == 1 )
-    //            {
-    //                row_exp = T.matrix_[i - 1][j] * omega;
-    //                entry   = row_exp;
-    //            }
-    //            else
-    //            {
-    //                entry   = T.matrix_[i][j - 1] * row_exp;
-    //            }
-    //        }
-
-    //        T.matrix_[i][j] = entry;
-    //    }
-    //}
 };
 
 //========================================================================
