@@ -35,7 +35,7 @@ std::vector<std::string> wav_files = { "../resources/sine_sweep.wav",
                                        "../resources/sample_piano.wav",
                                        "../resources/Q2_sample_2.wav" };
 
-const char const* FILE_PATH = wav_files[1].c_str();
+const char const* FILE_PATH = wav_files[0].c_str();
 
 void test();
 
@@ -109,6 +109,8 @@ int main( int argc, char** argv )
 
         eq_curve.drawSpectrumTowindow( audio_spectrum );
         eq_curve.drawToWindow();
+
+        audio_device.switchAnyalyzer( input_manager.getKeys() );
 
         frame_rate_limiter.LimitFPS();
         frame_rate_limiter.printFPS();

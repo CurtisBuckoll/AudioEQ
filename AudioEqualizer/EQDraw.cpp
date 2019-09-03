@@ -94,6 +94,10 @@ void EQDraw::processUserInput( bool* keys )
         update_curve_ = true;
         keys[kWHEEL_DOWN] = false;
     }
+    if( keys[SDLK_SPACE] )
+    {
+
+    }
 }
 
 // =======================================================================

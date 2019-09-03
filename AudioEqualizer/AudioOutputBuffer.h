@@ -9,7 +9,7 @@
 // curve. It was originally set to 128 which was a wide buffer. 
 // lowering may not provide enough buffer space and the audio will 
 // cut out.
-static const size_t kAUDIO_BUFFER_SIZE = 32; // 128
+static const size_t kAUDIO_BUFFER_SIZE = 20; // 128
 
 // =======================================================================
 // 

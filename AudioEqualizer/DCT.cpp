@@ -21,6 +21,7 @@ DCT::DCT( size_t mat_size )
         for( Uint j = 0; j < N; ++j )
         {
             const double a = i == 0 ? sqrt( 1.0 / N ) : sqrt( 2.0 / N );
+            //const double a = 1.0 / std::sqrt( static_cast<double>( N ) );
             double entry = a * std::cos( ( ( 2.0 * j + 1.0 ) * i * PI ) / ( 2.0 * N ) );
             T.matrix_[i][j] = entry;
         }
